@@ -74,10 +74,26 @@ var eliminarhistoria = (id) => {
         })
     })
 }
+
+
+
+var getHistoriaByPacienteID = async(req, res) => {
+
+    const ordenCompra = await historiamodel.find({ paciente: req.params.paciente });
+
+    res.json(ordenCompra);
+
+
+
+};
+
+
 module.exports = {
     crear: crear,
     listar: listar,
     listarhistoria: listarhistoria,
     modificarhistoria: modificarhistoria,
-    eliminarhistoria: eliminarhistoria
+    eliminarhistoria: eliminarhistoria,
+    getHistoriaByPacienteID: getHistoriaByPacienteID
+
 }

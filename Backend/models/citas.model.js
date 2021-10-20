@@ -106,7 +106,8 @@ var cita = new Schema({
     doctor: { type: String },
     especialidad: { type: String },
     fechaHora: { type: Date },
-    estado: { type: Number }
+    estado: { type: Number },
+    salaNumero: { type: String }
 }, {
     versionKey: false
 });

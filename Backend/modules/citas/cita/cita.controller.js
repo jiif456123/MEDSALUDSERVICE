@@ -7,14 +7,14 @@ const citaService = require('./cita.service');
 router.post('/', (req, res) => {
     let cita = req.body;
     citaService.crear(cita).then(
-        (data) => http.ok(req, res, code.status.Ok.code, data))
+            (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
 
 router.get('/', (req, res) => {
     citaService.listar().then(
-        (data) => http.ok(req, res, code.status.Ok.code, data))
+            (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
@@ -23,7 +23,16 @@ router.put('/:id', (req, res) => {
     let id = req.params.id;
     let citaAct = req.body;
     citaService.actualizar(id, citaAct).then(
-        (data) => http.ok(req, res, code.status.Ok.code, data))
+            (data) => http.ok(req, res, code.status.Ok.code, data))
+        .catch(
+            (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
+})
+
+
+
+router.delete('/drop', (req, res) => {
+    citaService.drop().then(
+            (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })

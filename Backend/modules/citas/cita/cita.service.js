@@ -8,7 +8,8 @@ let crear = (cita) => {
         fechaHora: cita.fechaHora,
         doctor: cita.doctor,
         especialidad: cita.especialidad,
-        estado: 1
+        estado: 1,
+        salaNumero: cita.salaNumero //Nuevo
     })
     return new Promise((resolve, reject) => {
         nuevaCita.save(nuevaCita, (err, data) => {
@@ -47,8 +48,23 @@ let actualizar = (idCita, cita) => {
     })
 }
 
+
+let drop = () => {
+    return new Promise((resolve, reject) => {
+        modelCita.deleteMany({})
+            .exec((err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            })
+    })
+}
+
 module.exports = {
     crear: crear,
     listar: listar,
-    actualizar: actualizar
+    actualizar: actualizar,
+    drop: drop
 }
+
+
+//module.exports = cita;
