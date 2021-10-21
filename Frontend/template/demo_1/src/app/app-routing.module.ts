@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RegistrarCitaComponent } from './registrar-cita/registrar-cita.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'registrar-cita', component: RegistrarCitaComponent },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'consultaragenda', loadChildren: ()=> import('./Consultar Agenda/consultar-agenda.module').then(m => m.ConsultarAgendaModule)},
   { path: 'gestionar-historia', loadChildren: ()=> import('./Gestionar-Historica-Clinica/gestionar-historia.module').then(m => m.gestionarhistoriaModule)},
   { path: 'gestionar-paciente', loadChildren: ()=> import('./Gestionar-Paciente/gestionar-paciente.module').then(m => m.gestionarpacienteModule)},
+
 ];
 
 @NgModule({
