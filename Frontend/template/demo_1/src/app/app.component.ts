@@ -17,9 +17,9 @@ export class AppComponent implements OnInit{
   isLoading: boolean;
 
   constructor(private router: Router, translate: TranslateService) {
-    
+
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
-    router.events.forEach((event) => { 
+    router.events.forEach((event) => {
       if(event instanceof NavigationStart) {
         if(event.url === '/dashboard/rtl') {
           translate.use('ar');
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
           translate.use('en');
           document.querySelector('body').classList.remove('rtl');
         }
-        if((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/login-2') || (event['url'] == '/user-pages/register') || (event['url'] == '/user-pages/register-2') || (event['url'] == '/user-pages/lock-screen') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500') ) {
+        if((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/login-2') || (event['url'] == '/user-pages/register') || (event['url'] == '/user-pages/register-2') || (event['url'] == '/user-pages/lock-screen') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500') || (event['url'] == '/presentarhome') ) {
           this.showSidebar = false;
           this.showNavbar = false;
           this.showFooter = false;
@@ -46,6 +46,9 @@ export class AppComponent implements OnInit{
           if((event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500')) {
             document.querySelector('.content-wrapper').classList.add('p-0');
           }
+          if((event['url'] == '/presentarhome')) {
+            document.querySelector('.content-wrapper').classList.add('p-0');
+          }
         } else {
           this.showSidebar = true;
           this.showNavbar = true;
@@ -60,7 +63,7 @@ export class AppComponent implements OnInit{
     });
 
     // Spinner for lazyload modules
-    router.events.forEach((event) => { 
+    router.events.forEach((event) => {
       if (event instanceof RouteConfigLoadStart) {
           this.isLoading = true;
       } else if (event instanceof RouteConfigLoadEnd) {
