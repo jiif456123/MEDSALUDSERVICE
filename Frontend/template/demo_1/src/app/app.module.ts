@@ -17,6 +17,7 @@ import { SettingsPanelComponent } from './shared/settings-panel/settings-panel.c
 import { FooterComponent } from './shared/footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
+import { RegistrarCitaComponent } from './registrar-cita/registrar-cita.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsPanelComponent,
     FooterComponent,
     SpinnerComponent,
-    ContentAnimateDirective
+    ContentAnimateDirective,
+    RegistrarCitaComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
     }
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
