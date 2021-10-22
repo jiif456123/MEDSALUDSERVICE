@@ -17,8 +17,9 @@ import { SettingsPanelComponent } from './shared/settings-panel/settings-panel.c
 import { FooterComponent } from './shared/footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
-import { RegistrarCitaComponent } from './registrar-cita/registrar-cita.component';
-
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -32,8 +33,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsPanelComponent,
     FooterComponent,
     SpinnerComponent,
+    GestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent,
     ContentAnimateDirective,
-    RegistrarCitaComponent
   ],
   imports: [
     BrowserModule,

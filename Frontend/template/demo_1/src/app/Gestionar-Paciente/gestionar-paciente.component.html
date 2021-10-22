@@ -2,14 +2,8 @@
     <div class="row">
         <div>
             <h1 class="text-right">
-                Gestionar Paciente
+                Listar Pacientes
             </h1>
-        </div>
-        <div class="col-md-4 d-flex justify-content-end" style="margin-bottom: 10px">
-            <button (click)="abrirModal()" type="button" class="btn btn-outline-primary" style="margin-bottom: 10px; float: left">
-          <i class="mdi mdi-pencil mdi-18px">REGISTRAR </i>
-          <input data-toggle="modal" data-target="#modalRegistrar" #modalRegistrar type="hidden" name="button" />
-      </button>
         </div>
     </div>
     <div class="row">
@@ -25,8 +19,7 @@
                                 <th class="text-center">Apellido Materno</th>
                                 <th class="text-center">dni</th>
                                 <th class="text-center">Fecha de Nacimiento</th>
-                                <th class="text-center">Estado</th>
-                                <th class="text-right" colspan="3">Opciones</th>
+                                <th class="text-right" colspan="1">Opciones</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let p of pacientes">
@@ -35,33 +28,10 @@
                             <td class="text-center">{{ p.apellidoMaterno }}</td>
                             <td class="text-center">{{ p.dni }}</td>
                             <td class="text-center">
-                                {{ p.fechaNaciemineto | date: "dd/MM/yyyy" }}
-                            </td>
-
-                            <td class="text-center">
-                                {{ p.estado == 1 ? "Activo" : "Inactivo" }}
-                            </td>
-                            <td class="text-center"></td>
-                            <td class="text-center">
-                                <button (click)="abrirModalModificar(p)" class="btn btn-success btn-sm btn-block">
-                              <i class="mdi mdi-update mdi-18px">Actualizar</i>
-                          </button>
-                                <input data-toggle="modal" data-target="#modalModificar" #modalModificar type="hidden" name="button" />
-                            </td>
-                            <td class="text-center">
                                 <button (click)="abrirModalDetalle(p)" class="btn btn-success btn-sm btn-block">
                               <i class="mdi mdi-update mdi-18px">Detalle</i>
                           </button>
                                 <input data-toggle="modal" data-target="#modalDetalle" #modalDetalle type="hidden" name="button" />
-                            </td>
-                            <td class="text-center">
-                                <button *ngIf="p.estado == 0" (click)="cambiarEstado(1, p._id)" class="btn btn-success btn-sm btn-block">
-                              <i class="mdi mdi-update mdi-18px">Activar</i>
-                          </button>
-
-                                <button *ngIf="p.estado == 1" (click)="cambiarEstado(0, p._id)" class="btn btn-success btn-sm btn-block">
-                              <i class="mdi mdi-update mdi-18px">Inactivar</i>
-                          </button>
                             </td>
                         </tr>
                     </table>

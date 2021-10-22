@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
           translate.use('en');
           document.querySelector('body').classList.remove('rtl');
         }
-        if((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/login-2') || (event['url'] == '/user-pages/register') || (event['url'] == '/user-pages/register-2') || (event['url'] == '/user-pages/lock-screen') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500') || (event['url'] == '/presentarhome') ) {
+        if((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/login-2') || (event['url'] == '/user-pages/register') || (event['url'] == '/user-pages/register-2') || (event['url'] == '/user-pages/lock-screen') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500') || (event['url'] == '/presentarhome') || (event['url'] == '/laboratorio') ){
           this.showSidebar = false;
           this.showNavbar = false;
           this.showFooter = false;
@@ -47,6 +47,9 @@ export class AppComponent implements OnInit{
             document.querySelector('.content-wrapper').classList.add('p-0');
           }
           if((event['url'] == '/presentarhome')) {
+            document.querySelector('.content-wrapper').classList.add('p-0');
+          }
+          if((event['url'] == '/laboratorio')) {
             document.querySelector('.content-wrapper').classList.add('p-0');
           }
         } else {
