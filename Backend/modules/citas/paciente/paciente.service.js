@@ -1,5 +1,7 @@
 const citasmodel = require("../../../models/citas.model");
 const pacientemodel = citasmodel.modelPaciente
+const gestionarMedicamentoOCService = {};
+
 let crear = (paciente) => {
     let fechaNacimiento = new Date(paciente.fechaNaciemineto)
     let newpaciente = new pacientemodel({
@@ -73,10 +75,22 @@ var eliminarpaciente = (id) => {
         })
     })
 }
+
+var getPacienteById = async(req, res) => {
+
+    const categoria = await pacientemodel.findById(req.params.id);
+
+    res.json(categoria);
+
+};
+
+
+
 module.exports = {
     crear: crear,
     listar: listar,
     listarpaciente: listarpaciente,
     modificarpaciente: modificarpaciente,
-    eliminarpaciente: eliminarpaciente
+    eliminarpaciente: eliminarpaciente,
+    getPacienteById: getPacienteById
 }

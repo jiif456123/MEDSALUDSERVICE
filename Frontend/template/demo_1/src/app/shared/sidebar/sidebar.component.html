@@ -10,8 +10,9 @@
                     <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                    <p class="profile-name">PATOSORD</p>
-                    <p class="designation" translate>Administrator</p>
+                    <p class="profile-name">{{nameSideBar}}</p>
+
+                    <p class="designation" translate>{{rolSideBar}}</p>
                 </div>
                 <div class="icon-container">
                     <i class="icon-bubbles"></i>
@@ -25,23 +26,57 @@
         <li class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
             <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive" [routerLinkActiveOptions]="{exact:
         true}">
-                <span class="menu-title" translate>Service</span>
+                <span class="menu-title" translate>Reporte General</span>
                 <i class="icon-screen-desktop menu-icon"></i>
             </a>
         </li>
 
-        <li class="nav-item" [ngClass]="{ 'active': citaVirtual.isActive }">
-            <a class="nav-link" routerLink="/cita-virtual" routerLinkActive #citaVirtual="routerLinkActive" [routerLinkActiveOptions]="{exact:
-        true}">
-                <span class="menu-title" translate>Cita Virtual</span>
-                <i class="icon-screen-desktop menu-icon"></i>
-            </a>
-        </li>
 
-        <li class="nav-item" [ngClass]="{ 'active': gestionarCitas.isActive }">
-            <a class="nav-link" routerLink="/gestionar-citas" routerLinkActive #gestionarCitas="routerLinkActive" [routerLinkActiveOptions]="{exact:
+
+
+
+
+        <ng-container *ngIf="permitirCita==true">
+
+            <li class="nav-item" [ngClass]="{ 'active': citaVirtual.isActive }">
+                <a class="nav-link" routerLink="/cita-virtual" routerLinkActive #citaVirtual="routerLinkActive" [routerLinkActiveOptions]="{exact:
         true}">
-                <span class="menu-title" translate>gestionar Citas</span>
-                <i class="icon-screen-desktop menu-icon"></i>
-            </a>
-        </li>
+                    <span class="menu-title" translate>Cita Virtual</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+        </ng-container>
+
+        <ng-container *ngIf="permitirHistoria==true">
+
+
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarHistoria.isActive }">
+                <a class="nav-link" routerLink="/gestionar-historia" routerLinkActive #gestionarHistoria="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Historia</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+        </ng-container>
+
+
+        <ng-container *ngIf="permitirGPacienteYGCita==true">
+            <li class="nav-item" [ngClass]="{ 'active': gestionarCitas.isActive }">
+                <a class="nav-link" routerLink="/gestionar-citas" routerLinkActive #gestionarCitas="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Citas</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarPaciente.isActive }">
+                <a class="nav-link" routerLink="/gestionar-paciente" routerLinkActive #gestionarPaciente="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Paciente</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+        </ng-container>

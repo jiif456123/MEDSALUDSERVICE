@@ -1,5 +1,6 @@
 const citasmodel = require("../../../models/citas.model");
 const usermodel = citasmodel.modelUser
+const gestionarMedicamentoOCService = {};
 
 let crear = (user) => {
     let fechaNacimiento = new Date(user.fechaNacimiento)
@@ -14,7 +15,7 @@ let crear = (user) => {
         fechaNacimiento: fechaNacimiento,
         direccion: user.direccion,
         especialidad: user.especialidad,
-        contraseña: user.contraseña,
+        password: user.password,
         fechaActual: new Date(),
         user: user.user
     })
@@ -76,6 +77,16 @@ var eliminarhistoria = (id) => {
         })
     })
 }
+
+
+gestionarMedicamentoOCService.dropDocuments = async(req, res) => {
+
+    const gestionarMedicamentoOC = await usermodel.deleteMany();
+
+    res.json(gestionarMedicamentoOC);
+
+};
+
 module.exports = {
     crear: crear,
     listar: listar,

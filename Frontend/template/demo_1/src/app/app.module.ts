@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChartsModule } from 'ng2-charts';
+//import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -23,7 +23,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
  //Pa que funcione la ruta :v 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { Dashboard } from './dashboard/dashboard.component';
 import { CitaVirtualComponent } from './domicilio/citaVirtual/citaVirtual.component';
 import { VirtualRoomComponent } from './domicilio/virtualRoom/virtualRoom.component';
 
@@ -31,6 +31,13 @@ import { GestionarCitasComponent } from './citas/gestionar-citas/gestionar-citas
 
 import { GestionarHistoriaComponent } from './citas/gestionar-Historia Clinica/gestionar-historia.component'; 
 
+import { LoginMComponent } from './iniciar-sesion/iniciar-sesion.component'; 
+
+import { AuthGuard } from './auth.guard';
+
+import { TokenInterceptorService } from './citas/services/token-interceptor.service';
+
+import { GestionarPacienteComponent } from './citas/gestionar-paciente/gestionar-paciente.component';
 // AoT requires an exported function for factories
 
 //citaVirtual
@@ -55,11 +62,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinnerComponent,
     ContentAnimateDirective,
      //Pa que funcione la ruta :v 
-    DashboardComponent,
+    Dashboard,
     CitaVirtualComponent,
     VirtualRoomComponent,
     GestionarCitasComponent,
-    GestionarHistoriaComponent
+    GestionarHistoriaComponent,
+    LoginMComponent,
+    GestionarPacienteComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
+    //ChartsModule,
     SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
       loader: {
@@ -82,7 +91,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     }
     })
   ],
-  providers: [FilterPipe],
+  providers: [FilterPipe, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

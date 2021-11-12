@@ -2,6 +2,11 @@ const http = require('../../../utils/http');
 const code = require('../../../utils/status');
 const router = require('express').Router();
 const pacienteService = require("./paciente.service");
+const { getPacienteById } = require('./paciente.service');
+const citasmodel = require("../../../models/citas.model");
+
+const pacientemodel = citasmodel.modelPaciente;
+
 
 router.post('/', (req, res) => {
     let paciente = req.body;
@@ -46,5 +51,9 @@ router.delete('/:id', (req, res) => {
             http.err(req, res, code.status.Internal_Server_Error, err);
         })
 });
+
+router.get('/:id', getPacienteById);
+
+
 
 module.exports = router;

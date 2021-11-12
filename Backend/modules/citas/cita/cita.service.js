@@ -59,11 +59,25 @@ let drop = () => {
     })
 }
 
+let getCitaByDoctor = async(req, res) => {
+    /* if ({ nombre: req.params.nombre } == null) {
+         const gestionarCategoria = await gestionarOrdenCompraModel.find();
+         res.send(gestionarCategoria);
+     } else {*/
+    const ordenCompra = await modelCita.find({ doctor: { $regex: req.params.doctor } });
+
+    res.json(ordenCompra);
+    /*  }*/
+
+
+};
+
 module.exports = {
     crear: crear,
     listar: listar,
     actualizar: actualizar,
-    drop: drop
+    drop: drop,
+    getCitaByDoctor: getCitaByDoctor
 }
 
 

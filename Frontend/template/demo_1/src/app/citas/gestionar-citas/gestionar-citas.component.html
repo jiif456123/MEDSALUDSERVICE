@@ -6,18 +6,12 @@
         </div>
 
         <div class="col-md-4 d-flex justify-content-end" style="margin-bottom: 10px">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" (click)="abrirModal()" class="btn btn-primary">
                 Agregar
-            </button>
-
-            <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter">
             </button>
             <input data-toggle="modal" data-target="#modalCita" #modalCita type="hidden" name="button">
         </div>
     </div>
-
-
-
     <div class="row">
         <!--Tabla-->
         <div class="table-responsive">
@@ -43,12 +37,11 @@
                         <td>{{ cita.doctor}}</td>
                         <td>{{ cita.estado == 1 ? 'Activa': 'Cancelada'}}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-success btn-sm btn-block" (click)="abrirModalAct(cita)" data-bs-toggle="modal" data-bs-target="#modalCitaAct">
-                               Actualizar 
+                            <button (click)="abrirModalAct(cita)" class="btn btn-success btn-sm btn-block">
+                                <i class="mdi mdi-update mdi-18px">Actualizar</i>
                             </button>
-
+                            <input data-toggle="modal" data-target="#modalCitaAct" #modalCitaAct type="hidden" name="button" />
                         </td>
-
                     </tr>
                 </tbody>
             </table>
@@ -57,9 +50,70 @@
 
 </div>
 
+<!--Modal para añadir-->
+<div class="modal fade" id="modalCita" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalCita" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar cita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formCita" class="modal-body">
+                <form [formGroup]="formCita" class="row">
+
+                    <div class="form-group col-md-12">
+                        <label for="motivo">Motivo</label>
+                        <select formControlName="motivo" class="form-control" id="motivo">
+                            <option *ngFor="let mot of motivos" [value]="mot._id">
+                                {{ mot.descripcion }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="fechaHora">Fecha y hora</label>
+                        <input formControlName="fechaHora" type="datetime-local" class="form-control" id="fechaHora" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="dni">DNI Paciente</label>
+                        <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control" id="dni" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="especialidad">Especialidad</label>
+                        <select formControlName="especialidad" class="form-control" id="especialidad">
+                            <option *ngFor="let esp of especialidad" [value]="esp.des">
+                                {{ esp.des }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="doctor">Doctor</label>
+                        <input formControlName="doctor" type="text" class="form-control" id="doctor" placeholder="..." />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="registrar()" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--Modal para actualizar-->
-<div class="modal fade" id="modalCitaAct" data-bs-backdrop="false" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalCitaAct" aria-hidden="true">
+<div class="modal fade" id="modalCitaAct" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalCitaAct" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -114,74 +168,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" (click)="actualizar()" class="btn btn-primary">Actualizar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<div class="modal" id="staticBackdrop" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div *ngIf="formCita" class="modal-body">
-                <form [formGroup]="formCita" class="row">
-
-                    <div class="form-group col-md-12">
-                        <label for="motivo">Motivo</label>
-                        <select formControlName="motivo" class="form-control" id="motivo">
-                            <option *ngFor="let mot of motivos" [value]="mot._id">
-                                {{ mot.descripcion }}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="fechaHora">Fecha y hora</label>
-                        <input formControlName="fechaHora" type="datetime-local" class="form-control" id="fechaHora" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="dni">DNI Paciente</label>
-                        <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control" id="dni" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="nombrePaciente">Paciente</label>
-                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="especialidad">Especialidad</label>
-                        <select formControlName="especialidad" class="form-control" id="especialidad">
-                            <option *ngFor="let esp of especialidad" [value]="esp.des">
-                                {{ esp.des }}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="doctor">Doctor</label>
-                        <input formControlName="doctor" type="text" class="form-control" id="doctor" placeholder="..." />
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" (click)="registrar()" class="btn btn-primary">Registrar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-
         </div>
     </div>
 </div>

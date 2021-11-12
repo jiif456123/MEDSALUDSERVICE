@@ -1,7 +1,11 @@
 const http = require('../../../utils/http');
 const code = require('../../../utils/status');
+
 const router = require('express').Router();
 const userService = require("./user.service");
+
+const { dropDocuments } = require('./user.service');
+
 
 router.post('/', (req, res) => {
     let user = req.body;
@@ -46,5 +50,8 @@ router.delete('/:id', (req, res) => {
             http.err(req, res, code.status.Internal_Server_Error, err);
         })
 });
+
+
+
 
 module.exports = router;

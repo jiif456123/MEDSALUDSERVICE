@@ -24,4 +24,8 @@ export class CitaService {
   actualizar(id: string, query: any) {
     return this.http.put<any>(`${this.urlEndPoint}/${id}`, query);
   }
+
+  citasByDoctorName(nombre: string){
+    return this.http.get<any>(`${this.urlEndPoint}/${nombre}`);
+  }
 }

@@ -6,7 +6,7 @@ import { CitaService } from 'src/app/citas/services/cita.service';
 import { HistoriaService } from 'src/app/citas/services/historia.service';
 import { Cita } from 'src/app/citas/models/cita.model';
 import Swal from 'sweetalert2';
-
+import { UserAllService } from 'src/app/citas/services/usersAll.service';
 @Component({
   selector: 'app-categoriaM',
   templateUrl: './citaVirtual.component.html',
@@ -17,10 +17,16 @@ import Swal from 'sweetalert2';
 export class CitaVirtualComponent implements OnInit {
 
   citas: Cita[] = []
-  constructor(private router:Router, public citaService: CitaService, public historiaService: HistoriaService) { }
+  constructor(private router:Router, public citaService: CitaService, public historiaService: HistoriaService, private userAllService:UserAllService) { }
 
-  ngOnInit(): void{//  NEW 
-  
+  public nombreUsuario;
+  public apellidoUsuario;
+  public nombrePaciente;
+
+  public rolUsuario;
+
+  ngOnInit(){//  NEW 
+   this.getDataOfUser();
     this.listarCitas();
   }
   
@@ -48,8 +54,33 @@ export class CitaVirtualComponent implements OnInit {
 
   async listarCitas(){
 
-    var dataCita = await this.citaService.listar().toPromise();
-    this.citas = dataCita.data;
+   /*
+    this.citaService.listar().subscribe(
+      res =>{
+          res.filter(item => item.doctor==this.nombreUsuario);
+          console.log(res);
+      }, err=>{
+
+      })*/
+      //Filtro por nombre del doctor
+      var dataCita = await this.citaService.listar().toPromise();
+      if(this.rolUsuario=="Doctor"||this.rolUsuario=="Medico"||this.rolUsuario=="medico"||this.rolUsuario=="doctor"){
+        
+        //this.citas = dataCita.data;
+        this.citas = dataCita.data.filter(item => item.doctor==this.nombreUsuario);
+      }
+
+      if(this.rolUsuario=="paciente"||this.rolUsuario=="Paciente"){
+       
+        this.citas = dataCita.data;
+
+        this.citas =this.citas.filter(item => item.paciente.nombre==this.nombreUsuario);
+      }
+      
+
+  }
+
+  listarByDoctor(doctorName: string){
     
 
   }
@@ -137,6 +168,21 @@ export class CitaVirtualComponent implements OnInit {
       },
       err => console.error(err)
 
+    )
+  }
+
+  getDataOfUser(){
+    this.userAllService.getUserById(localStorage.getItem('idLoginUser')).subscribe(
+      res =>{
+        
+        this.nombreUsuario=res.nombre;
+        this.apellidoUsuario=res.apellidoPaterno;
+        
+        this.rolUsuario=res.rol;
+        this.nombrePaciente= this.nombreUsuario + " " + this.apellidoUsuario;
+      
+      },
+      err => console.error(err)
     )
   }
 

@@ -2,6 +2,7 @@ const servidor = require('../config/server')
 const express = require('express');
 const morgan = require('morgan');
 const rutas = require('../router/network');
+const cors = require('cors');
 const app = express();
 var db = require('../utils/connection');
 var mongo = require('../utils/database').database;
@@ -13,6 +14,7 @@ db(mongo.url, mongo.options)
     }).catch((reason) => {
         console.log(color.red, `[ERRO-DATABASE]=${reason}`);
     });
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

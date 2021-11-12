@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
 
-router.get('/', (req, res) => {
+router.get('/' /*, verifyToken*/ , (req, res) => {
     citaService.listar().then(
             (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
@@ -37,4 +37,10 @@ router.delete('/drop', (req, res) => {
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
 
+/*
+function verifyToken(req, res, next) {
+    if (!req.headers.authorization) {
+        return res.status(401).send('Unthorize Request')
+    }
+}*/
 module.exports = router

@@ -13,6 +13,8 @@ import { MotivoService } from '../services/motivo.service';
 
 import { PacienteService } from '../services/paciente.service';
 import {v4 as uuidv4} from 'uuid';
+
+import { UserAllService } from '../services/usersAll.service';
 @Component({
   selector: 'app-gestionar-citas',
   templateUrl: './gestionar-citas.component.html',
@@ -65,7 +67,8 @@ export class GestionarCitasComponent implements OnInit {
     private motivoService: MotivoService,
     private citaService: CitaService,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private userAllService: UserAllService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -78,6 +81,7 @@ export class GestionarCitasComponent implements OnInit {
 
     var dataCita = await this.citaService.listar().toPromise();
     this.citas = dataCita.data;
+  
 
     this.formCita = this.fb.group({
       motivo: ['', [Validators.required]],
@@ -220,4 +224,6 @@ export class GestionarCitasComponent implements OnInit {
       console.log(err);
     }
   }
+
+
 }

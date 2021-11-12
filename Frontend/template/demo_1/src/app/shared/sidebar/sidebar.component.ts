@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-
+import { UserAllService } from 'src/app/citas/services/usersAll.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,13 +20,25 @@ export class SidebarComponent implements OnInit {
   public errorCollapsed = false;
   public generalPagesCollapsed = false;
   public eCommerceCollapsed = false;
-  
-  constructor(translate: TranslateService) {
+
+
+
+  constructor(translate: TranslateService, private userAllService:UserAllService) {
     // this language will be used as a fallback when a translation isn't found in the current language
+    
     translate.setDefaultLang('en');
   }
 
+  public nameSideBar;
+  public rolSideBar;
+
+  public permitirHistoria;
+  public permitirGPacienteYGCita;
+public permitirCita;
   ngOnInit() {
+    console.log(this.userAllService.selectedTokenUser.nombre);
+      
+    this.getDataOfUser();
     const body = document.querySelector('body');
 
     // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
@@ -42,6 +54,39 @@ export class SidebarComponent implements OnInit {
         }
       });
     });
+  }
+
+
+  getDataOfUser(){
+    this.userAllService.getUserById(localStorage.getItem('idLoginUser')).subscribe(
+      res =>{
+        
+        this.nameSideBar=res.nombre;
+        this.rolSideBar=res.rol;
+
+        if(this.rolSideBar=="Medico"||this.rolSideBar=="medico"||this.rolSideBar=="Doctor"||this.rolSideBar=="enfermera"||this.rolSideBar=="Enfermera"
+        ||this.rolSideBar=="doctor"
+        
+        ){
+            this.permitirHistoria=true;
+        }else{
+          this.permitirHistoria=false;
+        }
+
+        if(this.rolSideBar=="enfermera"||this.rolSideBar=="Enfermera"||this.rolSideBar=="Enfermero"||this.rolSideBar=="enfermero"){
+            this.permitirGPacienteYGCita=true;
+        }else{
+          this.permitirGPacienteYGCita=false;
+        }
+        
+        if(this.rolSideBar=="paciente"||this.rolSideBar=="Paciente"||this.rolSideBar=="Medico"||this.rolSideBar=="medico"||this.rolSideBar=="Doctor"||this.rolSideBar=="doctor"){
+          this.permitirCita=true;
+        }else{
+          this.permitirCita=false;
+        }
+      },
+      err => console.error(err)
+    )
   }
 
 }

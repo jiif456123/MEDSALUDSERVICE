@@ -127,7 +127,7 @@ var user = new Schema({
     fechaNacimiento: { type: Date },
     direccion: { type: String },
     especialidad: { type: String },
-    contraseña: { type: String },
+    password: { type: String },
     user: { type: String }
 }, {
     versionKey: false

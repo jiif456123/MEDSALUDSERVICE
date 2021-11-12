@@ -22,4 +22,8 @@ export class PacienteService {
   actualizar(id: string, query: any) {
     return this.http.put<any>(`${this.urlEndPoint}/${id}`, query);
   }
+
+  getPacienteById(id: string){
+    return this.http.get<any>(`${this.urlEndPoint}/${id}`);
+  }
 }

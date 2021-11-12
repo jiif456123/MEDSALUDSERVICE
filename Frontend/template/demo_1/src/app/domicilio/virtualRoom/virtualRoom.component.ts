@@ -8,6 +8,8 @@ import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 declare const Peer;
 
+import { UserAllService } from 'src/app/citas/services/usersAll.service';
+
 interface VideoElement {
   muted: boolean;
   srcObject: MediaStream;
@@ -27,6 +29,8 @@ export class VirtualRoomComponent implements OnInit {
 
   currentUserId:string = uuidv4();
   videos: VideoElement[] = [];
+  //videos: VideoElement[] = [];
+
 formHistoriaModificar: FormGroup;
   //NEW ROOM
   roomName: string;
@@ -37,15 +41,19 @@ formHistoriaModificar: FormGroup;
      
      private peerService: PeerService
      */
-     , public historiaService: HistoriaService) { 
+     , public historiaService: HistoriaService, private userAllService:UserAllService) { 
       //New room
       this.roomName = route.snapshot.paramMap.get('id');
 
      }
-
+  
+     public nombreUsuario;
+     public rolUsuario;
+     public doctorBoolean;
+     public usuarioEntrante;
     
      ngOnInit() {
-
+      this.getDataOfUser();
       //this.historiaService.selectedHistoria.medico="xd";
       console.log(`Initialize Peer with id ${this.currentUserId}`);
       const myPeer = new Peer(this.currentUserId, {
@@ -78,6 +86,9 @@ formHistoriaModificar: FormGroup;
   
           myPeer.on('call', (call) => {
             console.log('receiving call...', call);
+            
+            console.log(call.metadata.userLoginId);
+            this.usuarioEntrante=call.metadata.userLoginId;
             call.answer(stream);
   
             call.on('stream', (otherUserVideoStream: MediaStream) => {
@@ -97,17 +108,17 @@ formHistoriaModificar: FormGroup;
             // Let some time for new peers to be able to answer
             setTimeout(() => {
               const call = myPeer.call(userId, stream, {
-                metadata: { userId: this.currentUserId },
+                metadata: { userId: this.currentUserId, userLoginId: localStorage.getItem('idLoginUser') },
               });
               call.on('stream', (otherUserVideoStream: MediaStream) => {
                 console.log('receiving other user stream after his connection');
                 this.addOtherUserVideo(userId, otherUserVideoStream);
               });
-  
+              //console.log(userId);
               call.on('close', () => {
                 this.videos = this.videos.filter((video) => video.userId !== userId);
               });
-            }, 1000);
+            }, 5000);
           });
         });
   
@@ -155,6 +166,25 @@ formHistoriaModificar: FormGroup;
               (err) => console.error(err)
           );
       }
+    }
 
+    getDataOfUser(){
+      this.userAllService.getUserById(localStorage.getItem('idLoginUser')).subscribe(
+        res =>{
+          
+          this.nombreUsuario=res.nombre;
+          this.rolUsuario= res.rol;
+
+          if(this.rolUsuario=="Doctor"||this.rolUsuario=="Medico"){
+            this.doctorBoolean=true;  
+          }else{
+            this.doctorBoolean=false;
+          }
+          //console.log(this.rolUsuario);
+          //this.rolSideBar=res.rol;
+          
+        },
+        err => console.error(err)
+      )
     }
 }

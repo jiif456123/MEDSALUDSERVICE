@@ -26,6 +26,7 @@
                             <th class="text-center">Codigo</th>
                             <th class="text-center">Medico</th>
                             <th class="text-center">Especialidad</th>
+
                             <!--  <th scope="col">Paciente</th> -->
                             <th class="text-center">Fecha</th>
                             <th class="text-center" colspan="2">Opciones</th>
@@ -35,8 +36,9 @@
                         <td class="text-center">{{ h._id }}</td>
                         <td class="text-center">{{ h.medico }}</td>
                         <td class="text-center">{{ h.especialidad }}</td>
-                        <!--<td class="text-center">{{ h.paciente.nombre }} {{h.paciente.apellidoPate -->
+
                         <td class="text-center">{{ h.fecha | date: "dd/MM/yyyy" }}</td>
+
                         <td class="text-center"></td>
                         <td class="text-center">
                             <button (click)="abrirModalModificar(h)" class="btn btn-success btn-sm btn-block">
@@ -53,75 +55,85 @@
 
 <!--Modal para añadir-->
 
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalRegistrar" aria-hidden="true" id="modalRegistrar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formHistoria" class="modal-body">
+                <form [formGroup]="formHistoria" class="row">
+                    <div class="form-group col-md-12">
+                        <label for="medico">Medico</label>
+                        <input formControlName="medico" type="text" class="form-control" id="medicos" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dni">DNI Paciente</label>
+                        <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control" id="dni" placeholder="..." />
+                    </div>
 
-<div *ngIf="formHistoria" class="">
-    <form [formGroup]="formHistoria" class="row">
-        <div class="form-group col-md-12">
-            <label for="medico">Medico</label>
-            <input formControlName="medico" type="text" class="form-control" id="medicos" placeholder="" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="dni">DNI Paciente</label>
-            <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control" id="dni" placeholder="..." />
-        </div>
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="especialidad">Especialidad</label>
 
-        <div class="form-group col-md-6">
-            <label for="nombrePaciente">Paciente</label>
-            <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="especialidad">Especialidad</label>
-
-            <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
+                        <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
                             <option value="Medicina General">Medicina General</option>
                             <option value="Dental">Dental</option>
                             <option value="Obtetricia">Obtetricia</option>
                             <option value="Pediatria">Pediatria</option>
                           </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="peso">Peso(Kilogramos)</label>
-            <input formControlName="peso" type="text" class="form-control" id="pesos" placeholder="" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="altura">Altura(metros)</label>
-            <input formControlName="altura" type="text" class="form-control" id="alturas" placeholder="" />
-        </div>
-        <div class="form-group col-md-6">
-            <label for="tension">Presión</label>
-            <input formControlName="tension" type="text" class="form-control" id="tensions" placeholder="" />
-        </div>
-        <div class="form-group col-md-12">
-            <label for="alergias">Alergias</label>
-            <textarea formControlName="alergias" type="text" class="form-control" id="alergiass" placeholder=""></textarea>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="fecha">Fecha</label>
-            <input formControlName="fecha" type="date" class="form-control" id="fechas" placeholder="" />
-        </div>
-        <div class="form-group col-md-12">
-            <label for="antecedentes">Evolución del paciente</label>
-            <textarea formControlName="antecedentes" type="text" class="form-control" id="antecedentess" placeholder=""></textarea>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="historia">Historia</label>
-            <textarea formControlName="historia" type="text" class="form-control" id="historias" placeholder=""></textarea>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="diagnostico">Diagnostico</label>
-            <textarea formControlName="diagnostico" type="text" class="form-control" id="diagnosticos" placeholder=""></textarea>
-        </div>
-    </form>
-</div>
-
-<button type="button" (click)="registrar()" class="btn btn-primary">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="peso">Peso(Kilogramos)</label>
+                        <input formControlName="peso" type="text" class="form-control" id="pesos" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="altura">Altura(metros)</label>
+                        <input formControlName="altura" type="text" class="form-control" id="alturas" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tension">Presión</label>
+                        <input formControlName="tension" type="text" class="form-control" id="tensions" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="alergias">Alergias</label>
+                        <textarea formControlName="alergias" type="text" class="form-control" id="alergiass" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="fecha">Fecha</label>
+                        <input formControlName="fecha" type="date" class="form-control" id="fechas" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="antecedentes">Evolución del paciente</label>
+                        <textarea formControlName="antecedentes" type="text" class="form-control" id="antecedentess" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="historia">Historia</label>
+                        <textarea formControlName="historia" type="text" class="form-control" id="historias" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="diagnostico">Diagnostico</label>
+                        <textarea formControlName="diagnostico" type="text" class="form-control" id="diagnosticos" placeholder=""></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="registrar()" class="btn btn-primary">
                     Registrar
                 </button>
-<button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cerrar
                 </button>
-
-
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--Modal para añadir-->
 
@@ -149,20 +161,23 @@
                             <option value="Pediatria">Pediatria</option>
                           </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="dni">DNI Paciente</label>
-                        <input formControlName="dni" type="text" readonly class="form-control" id="dni1" placeholder="..." />
-                    </div>
 
                     <div class="form-group col-md-6">
-                        <label for="nombrePaciente1">Paciente</label>
-                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente1" placeholder="..." />
+                        <label for="pesoNum">DNI Paciente</label>
+                        <input formControlName="pesoNum" type="text" class="form-control" id="pesoNum" placeholder="" readonly/>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="peso">Peso(Kilogramos)</label>
                         <input formControlName="peso" type="text" class="form-control" id="peso" placeholder="" />
                     </div>
+
                     <div class="form-group col-md-6">
                         <label for="altura">Altura(metros)</label>
                         <input formControlName="altura" type="text" class="form-control" id="altura" placeholder="" />

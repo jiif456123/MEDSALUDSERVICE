@@ -1,0 +1,439 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*Nuestros estilos*/
+
+body {
+    font-family: sans-serif;
+}
+
+.main {
+    background: url(../../assets/images/presentarhomeimagenes/fondopantalla.jpg) no-repeat center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.layer {
+    padding: 2em 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.content-tank {
+    max-width: 500px;
+    margin: 6em auto;
+}
+
+ul.links-uno-list li.active a {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 20px;
+    color: #fff;
+}
+
+.icon span.fa {
+    font-size: 60px;
+    color: #fff;
+}
+
+.icon {
+    margin-bottom: 3em;
+}
+
+.content-bottom {
+    padding: 0em 4em;
+    margin: 0 1em;
+    position: relative;
+    z-index: 1;
+}
+
+.logo h1 a {
+    font-size: 25px;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.content-tank ul li {
+    display: inline-block;
+}
+
+li.sw-a {
+    float: left;
+}
+
+ul.list-login li:nth-child(2) {
+    float: right;
+}
+
+ul.list-login-bottom li:nth-child(2) {
+    float: right;
+}
+
+.field-group label {
+    font-size: 15px;
+}
+
+.checkbox input,
+.radio input {
+    position: absolute;
+    left: -9999px;
+}
+
+.checkbox i {
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    outline: none;
+    border: none;
+    background: #fff;
+}
+
+.checkbox {
+    position: relative;
+    padding-left: 28px !important;
+    cursor: pointer;
+}
+
+.checkbox input:checked+i:after,
+.radio input:checked+i:after {
+    opacity: 1;
+}
+
+.checkbox input+i:after,
+.radio input+i:after {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+form .field-group {
+    background: rgba(6, 184, 255, 0.459);
+    display: flex;
+    margin-bottom: 20px;
+    padding: 2px 10px 2px 0;
+    border-radius: 35px;
+}
+
+form .field-group span {
+    flex: 1;
+    width: 20%;
+    color: #fff;
+    background: transparent;
+    line-height: 49px;
+    text-align: right;
+}
+
+ul.list-login {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+form .field-group .w-field {
+    flex: 4 50%;
+}
+
+.w-field button.btn {
+    background: #01c2fd;
+    border: none;
+    color: #fff;
+    padding: 11px 15px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.5s all;
+    border-radius: 35px;
+}
+
+.bottom-grid,
+.bottom-grid1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0em 10em;
+}
+
+.bottom-grid1 {
+    margin-top: 170px;
+}
+
+ul.links-uno-list li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+ul.links-uno-list li a {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+    letter-spacing: 1px;
+    padding: 0 5px;
+    text-transform: capitalize;
+}
+
+.w-field input {
+    padding: 10px 0 10px 15px;
+    font-size: 17px;
+    font-weight: 300;
+    color: #ddd;
+    letter-spacing: 1px;
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    width: 100%;
+    outline: none;
+}
+
+label.sw {
+    position: relative;
+    display: inline-block;
+    height: 18px;
+    padding-left: 3em;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 300;
+}
+
+li:nth-child(2) a,
+label.sw {
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #fff !important;
+    text-transform: capitalize;
+}
+
+ul.list-login-bottom li:nth-child(1) a,
+ul.list-login-bottom li:nth-child(2) a {
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #fff !important;
+}
+
+li:nth-child(2) a,
+li:nth-child(1) a {
+    color: #fff;
+}
+
+.sw input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 21%;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #01c2fd;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(14px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.cop p {
+    color: #ccc;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 300;
+    word-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.cop p a {
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-groupUser {
+    margin-bottom: 25px;
+    margin-top: 100px;
+}
+
+.form-control {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/*
+.content-wrapper {
+    padding-top: 0px;
+}*/

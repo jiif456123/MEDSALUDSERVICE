@@ -1,204 +1,574 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FixedScaleAxis } from 'chartist';
-import { NgbDate, NgbCalendar, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+
+import { NgForm, FormGroup,FormControl, Validators } from '@angular/forms'; //para add
+
+import { MovimientoCajaService } from '../citas/services/movimiento-caja.service';
+
+//CHART JS
+import {Chart,registerables} from 'chart.js';
+//import * as Chart from 'chart.js';
+
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard2',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  styleUrls: [ './dashboard.component.scss'],
+  //Se agrego en providers GestionarOrdenCompraComponent por el error  The pipe ' ' could not be found angular2 custom pipe
+  providers: []
 })
-export class DashboardComponent implements OnInit {
-  toggleProBanner(event) {
-    event.preventDefault();
-    document.querySelector('body').classList.toggle('removeProbanner');
+
+
+export class Dashboard implements OnInit {
+
+ constructor(private movimientoCajaService: MovimientoCajaService) { 
+    
+  Chart.register(...registerables);
+
   }
-  @ViewChild('d', {static: false}) datepicker: NgbInputDatepicker;
 
-// Performance indicator chart
-  performanceIndicatorBarchartData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'may', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    series: [
-      [30, 25, 50, 25, 50, 25, 50, 55, 20, 35, 25, 30 ],
-      [25, 50, 10, 35, 30, 15, 20, 20, 30, 25, 10, 15 ],
-      [45, 25, 40, 40, 20, 60, 30, 25, 50, 40, 65, 55 ]
-    ]
-  };
+  public yearSelected;
+  public yearMovSelected;  
+  public yearOrdenCompraSelected;  
 
-  performanceIndicatorBarchartOptions = {
-    stackBars: true,
-            height: 200,
-            axisY: {
-              type: FixedScaleAxis,
-              ticks: [0, 25, 50, 75, 100]
-            },
-            showGridBackground: false
-  };
 
-  performanceIndicatorBarchartResponsiveOptions = [
-    ['screen and (max-width: 480px)', {
-      height: 150,
-    }]
-  ];
+  public monthSelected;
+  public nombreEquipoSelected;
+  public nombreCategoriaSelected;
+  public cantidadEmpleados=0;
+  public cantidadProveedores=0;
+  public myChartBarra: Chart;
+  public myChart: Chart;
+  public myChartCircular: Chart;
 
-  // Sessions by channel doughnut chart
+  public ingresoCitasArray=[];
+  public totalCitas=0;
+  //VARIABLES FILTRADO
+  public fechaDe;
+  public fechaHasta;
 
-  doughnutPieData = [{
-    data: [55, 25, 20],
-    backgroundColor: [
-        '#ffca00',
-        '#38ce3c',
-        '#ff4d6b'
-    ],
-    borderColor: [
-      '#ffca00',
-      '#38ce3c',
-      '#ff4d6b'
-    ],
-  }];
+  public ingresosPorEspecialidad=[];
+  public nombres = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  
+   ngOnInit(){//  NEW 
+    this.getDataOfMovimientoCaja("xd","d","dsd","ds",null,null);
+    var nombresSinRepetir = ["Hola", "Xd"];
+    var cantidadM = [1,2];  
+    var ingresoCitas= [232,444,545];  
+    var ingresoFarmacia = [1,2,3,4,5,6,7,8,9,10,11,12];
+    this.getDataForCircleChart();
+    this.getNumeroTotalCitas();
+   // this.setGraficoBarra("myChart",nombresSinRepetir,cantidadM);
+   
+   // this.setGraficoBarraDoble("myChartBarraDoble",this.nombres,this.ingresoCitasArray,ingresoFarmacia);
+    //await this.getDataOfMovimientoCaja();
 
-  doughnutPieLabels: [
-    'Reassigned',
-    'Not Assigned',
-    'Assigned'
-  ];
-  doughnutPieOptions = {
-    cutoutPercentage: 75,
-    animationEasing: 'easeOutBounce',
-    animateRotate: true,
-    animateScale: false,
-    responsive: true,
-    maintainAspectRatio: true,
-    showScale: true,
-    legend: {
-        display: false
-    },
-    layout: {
-      padding: {
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0
-      }
+    /*
+      await this.getDataOfMovimientoCaja();
+      this.setGraficoBarraDoble("myChartBarraDoble",nombres,this.ingresoCitasArray,ingresoFarmacia);
+*/
+    
+
+    //this.setGraficoBarraDoble("myChartBarraDoble",nombres,this.ingresoCitasArray,ingresoFarmacia);
+
+
+
+    //this.setGraficoBarraDoble("myChartBarraDoble",nombres,this.ingresoCitasArray,ingresoFarmacia);
+  //myCircleChart
+/*
+    setTimeout(() => {
+      this.setGraficoCircular("myCircleChart",this.ingresosPorEspecialidad);
+      //this.setGraficoBarraDoble("myChartBarraDoble",this.nombres,this.ingresoCitasArray,ingresoFarmacia);
+
+    }, 1000);*/
     }
-  };
+    
+   
 
-  // Income expense chart date range picker properties
+    setGraficoBarraDoble(canvas: string,labels: any[],data1: any[], data2: any[]){
+      if (this.myChart) this.myChart.destroy(); 
+       this.myChart = new Chart(canvas,{
+          type: 'bar',
+          
+          data: {
+              labels: labels,
+              
+              datasets: [
+                  {
+                  label: '#Citas',
+                  
+                  data: data1,
+                  backgroundColor: [
+                      'rgba(222, 222, 240, 1)'
+                      
+                  ],
+                  borderColor: [
+                      'rgba(222,222, 240, 1)'
+                      
+                  ],
+                  borderWidth: 1
+              },
+              {
+                  label: '#Farmacia',
+                  data: data2,
+                  backgroundColor: [
+                      'rgba(167, 197, 235, 1)'
+                      
+                  ],
+                  borderColor: [
+                      'rgba(197, 197, 235, 1)'
+                      
+                  ],
+                  borderWidth: 1
+              }
 
-  hoveredDate: NgbDate;
 
-  fromDate: NgbDate;
-  toDate: NgbDate;
-  onFirstSelection: boolean = true;
 
-  // Income expense chart
+              ]
+          },
 
-  incomeExpenseSummaryChartData = {
-    // A labels array that can contain any sort of values
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    // Our series array that contains series objects or in this case series data arrays
-    series: [
-      [505, 781, 480, 985, 410, 822, 388, 874, 350, 642, 320, 796],
-      [700, 430, 725, 390, 686, 392, 757, 500, 820, 400, 962, 420]
-    ]
-  };
 
-  incomeExpenseSummaryChartOptions = {
-    height: 300,
-    axisY: {
-      high: 1000,
-      low: 250,
-      referenceValue: 1000,
-      type: FixedScaleAxis,
-      ticks: [250, 500, 750, 1000]
-    },
-    showArea: true,
-    showPoint: false,
-    fullWidth: true
-  };
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          },
+      });
+      
+  } 
 
-  incomeExpenseSummaryChartResponsiveOptions = [
-    ['screen and (max-width: 480px)', {
-      height: 150,
-      axisX: {
-        labelInterpolationFnc: (value) => value,
-      }
-    }]
-  ];
-
-  // Income expense chart date range picker methods
-
-  onDateSelection(date: NgbDate) {
-    console.log(date);
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-      this.onFirstSelection = false;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
-      this.onFirstSelection = true;
-      this.datepicker.close();
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-      this.onFirstSelection = false;
-    }
+    setGraficoBarra(canvas: string,labels: any[], data: any[]){
+      if (this.myChartBarra) this.myChartBarra.destroy(); 
+      this.myChartBarra = new Chart(canvas,{
+          type: "bar",
+          data: {
+              labels: labels/*labels*/,
+              datasets: [{
+                  indexAxis: "y",
+                  label: 'Cantidad Medicamento Por Categoria',
+                  data: data,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                  ],
+                  borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                  ],
+                  borderWidth: 1
+                }]
+          }
+      });
   }
 
-  toNativeDate(date:NgbDate) {
-    if(date){
-      return new Date(date.year, date.month, date.day);
-    }else {
-      return "";
-    }
+
+  setGraficoCircular(canvas: string,data: any[]){
+    if (this.myChartCircular) this.myChartCircular.destroy(); 
+    this.myChartCircular = new Chart(canvas,{
+        type: 'doughnut',
+        data: {
+          //this.ingresosPorEspecialidad=[urgenciaMedica,dermatologia,olftalmologia,medicinaGeneral,cardiologia,gastroenterologia,pediatria];
+
+            labels: ["Urgencia Medica", "Dematologia", "Oftalmologia", "Medicina General", "Cardiologia", "Gastroenterologia", "Pediatria"]/*labels*/,
+            datasets: [{
+                label: '# of Votes',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(222, 222, 240, 1)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(222, 222, 240, 1)'
+                ],
+                borderWidth: 1
+            }]
+        }
+    });
+   
+}
+  
+ getDataOfMovimientoCaja(mesBuscar1: any, diaBuscar1: any, mesBuscar2: any, diaBuscar2: any,startDate: Date, endDate: Date){
+   /*var ingresoEnero,ingresoFebrero,ingresoMarzo,ingresoAbril,ingresoMayo,ingresoJunio,ingresoJulio,ingresoAgosto,ingresoSeptiembre,ingresoOctubre,
+    ingresoNoviembre,ingresoDiciembre; */
+    var ingresoTotal=0;
+    var numeroMesPrueba=5;
+    var ingresoEnero=0;
+    var ingresoFebrero=0;
+    var ingresoMarzo=0;
+    var ingresoAbril=0;
+    var ingresoMayo=0;
+    var ingresoJunio=0;
+    var ingresoJulio=0;
+    var ingresoAgosto=0;
+    var ingresoSeptiembre=0;
+    var ingresoOctubre=0;
+    var ingresoNoviembre=0;
+    var ingresoDiciembre=0;
+    var arrayEnero=[];
+    var arrayFebrero=[];
+    var arrayMarzo=[];
+    var arrayAbril=[];
+    var arrayMayo=[];
+    var arrayJunio=[];
+    var arrayJulio=[];
+    var arrayAgosto=[];
+    var arraySeptiembre=[];
+    var arrayOctubre=[];
+    var arrayNoviembre=[];
+    var arrayDiciembre=[];
+    var arrayIngresoCitasNew=[];
+    var newResultarDermatologia=[];
+    var newResultarOftalmologia=[];
+    var newResultarMedicinaGeneral=[];
+    var newResultarCardiologia=[];
+   // var numbers = new Array(1, 4, 9); 
+   var newResultarGastro=[];
+    var newResultarPediatria=[];
+    var arrayFiltradoMes=[];
+    var arrayFiltradoMesDesdeYHasta=[];
+
+   /* var d= new Date(this.fechaDe)
+    var fechaDesdeMes= d.getMonth()+1;
+    var fechaDesdeDia= d.getDate()+1;*/
+
+          // console.log(fechaDesdeMes+1);
+
+    this.movimientoCajaService.listar().subscribe(
+      res =>{
+
+        res.data.forEach( function(valor, indice) {
+          var d=new Date(res.data[indice].fechaHora);
+          var numeroMes=(d.getMonth()+1);
+          var numeroDia=d.getDate(); //aca nos da el dia pero no lo modifica por eso no se suma
+
+          //getMonth me da el mes -1
+
+           /*
+           if(numeroMes==11 && (numeroDia==1 && numeroDia==15) && numeroMes==12){
+                            
+           }
+           */
+           /*
+           var d= new Date(this.fechaDe)
+           var fechaDesdeMes= d.getMonth()+1;
+           console.log(fechaDesdeMes+1);
+           
+          if(fechaDesdeMes==numeroMes){
+
+          }
+*/
+/*
+          if((mesBuscar1==numeroMes && diaBuscar1==numeroDia) && (mesBuscar2==numeroMes && diaBuscar2==numeroDia) ){
+             arrayFiltradoMes.push(valor);
+             console.log("Se filtro desde el mes: "+mesBuscar1 +  " y el dia: " + diaBuscar1+ " con dia en la BD de: " + numeroDia);
+             console.log(arrayFiltradoMes);
+             console.log("Se filtro desde el mes: " + mesBuscar1 + " y dia: " + diaBuscar1 + " HASTA el mes: " + mesBuscar2 + " y dia: " + diaBuscar2);
+            // console.log(fechaDesdeDia);
+          }*/
+
+          if( (d>startDate) && (d<endDate) ){
+              console.log("filtro");
+              arrayFiltradoMes.push(valor);
+              console.log(arrayFiltradoMes);
+          }
+
+         //console.log("JAAA"+arrayFiltradoMes);
+
+        });
+        
+        arrayFiltradoMes.forEach( function(valor, indice) {
+          
+          var d=new Date(arrayFiltradoMes[indice].fechaHora);
+          var numeroMes=(d.getMonth()+1);
+          var numeroDia=d.getDate(); //aca nos da el dia pero no lo modifica por eso no se suma
+
+          if(numeroMes==1){
+            arrayEnero.push(valor);
+          }
+          if(numeroMes==2){
+            arrayFebrero.push(valor);
+          }
+          if(numeroMes==3){
+            arrayMarzo.push(valor);
+          }
+          if(numeroMes==4){
+            arrayAbril.push(valor);
+          }
+          if(numeroMes==5){
+            arrayMayo.push(valor);
+          }
+          if(numeroMes==6){
+            arrayJunio.push(valor);
+          }
+          if(numeroMes==7){
+            arrayJulio.push(valor);
+          }
+          if(numeroMes==8){
+            arrayAgosto.push(valor);
+          }
+          if(numeroMes==9){
+            arraySeptiembre.push(valor);
+          }
+          if(numeroMes==10){
+            arrayOctubre.push(valor);
+          }
+          if(numeroMes==11){
+            arrayNoviembre.push(valor);
+          }
+          if(numeroMes==12){
+            arrayDiciembre.push(valor);
+          }
+      
+        });
+
+
+
+        arrayEnero.forEach( function(valor, indice) {
+
+          ingresoEnero+= arrayEnero[indice].montoRecibido;
+        });
+        arrayFebrero.forEach( function(valor, indice) {
+
+          ingresoFebrero+= arrayFebrero[indice].montoRecibido;
+        });
+        arrayMarzo.forEach( function(valor, indice) {
+
+          ingresoMarzo+= arrayMarzo[indice].montoRecibido;
+        });
+        arrayAbril.forEach( function(valor, indice) {
+
+          ingresoAbril+= arrayAbril[indice].montoRecibido;
+        });
+        arrayMayo.forEach( function(valor, indice) {
+
+          ingresoMayo+= arrayMayo[indice].montoRecibido;
+        });
+        arrayJunio.forEach( function(valor, indice) {
+
+          ingresoJunio+= arrayJunio[indice].montoRecibido;
+        });
+        arrayJulio.forEach( function(valor, indice) {
+
+          ingresoJulio+= arrayJulio[indice].montoRecibido;
+        });
+        arrayAgosto.forEach( function(valor, indice) {
+
+          ingresoAgosto+= arrayAgosto[indice].montoRecibido;
+        });
+        arraySeptiembre.forEach( function(valor, indice) {
+
+          ingresoSeptiembre+= arraySeptiembre[indice].montoRecibido;
+        });
+        arrayOctubre.forEach( function(valor, indice) {
+
+          ingresoOctubre+= arrayOctubre[indice].montoRecibido;
+        });
+        arrayNoviembre.forEach( function(valor, indice) {
+
+          ingresoNoviembre+= arrayNoviembre[indice].montoRecibido;
+        });
+        arrayDiciembre.forEach( function(valor, indice) {
+
+          ingresoDiciembre+= arrayDiciembre[indice].montoRecibido;
+        });
+        
+         
+      
+/*
+    this.ingresoCitasArray=[ingresoEnero,ingresoFebrero,ingresoMarzo,ingresoAbril,ingresoMayo,ingresoJunio,ingresoJulio,ingresoAgosto,
+    ingresoSeptiembre,ingresoOctubre,ingresoNoviembre,ingresoDiciembre];
+*/
+
+    arrayIngresoCitasNew=[ingresoEnero,ingresoFebrero,ingresoMarzo,ingresoAbril,ingresoMayo,ingresoJunio,ingresoJulio,ingresoAgosto,
+      ingresoSeptiembre,ingresoOctubre,ingresoNoviembre,ingresoDiciembre];
+      console.log(ingresoAgosto);
+      console.log(ingresoJulio);
+      console.log(ingresoSeptiembre);
+
+    this.setGraficoBarraDoble("myChartBarraDoble",this.nombres,arrayIngresoCitasNew,[2,4,5,6,4,3,23]);
+
+      }, err =>console.error(err)
+
+    )
+
   }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+ 
+
+  getDataForCircleChart(){
+    var urgenciaMedica=0;
+    var dermatologia=0;
+    var olftalmologia=0;
+    var medicinaGeneral=0;
+    var cardiologia=0;
+    var gastroenterologia=0;
+    var pediatria=0;
+    var ingresosPorEspecialidadNew=[];
+
+
+    this.movimientoCajaService.listar().subscribe(
+      res =>{
+        //Urgencia Medica
+        /*
+        var resultUrgenciaMedica = res.data.filter((x,index) => { 
+
+          var d=res.data[index].motivo.descripcion;
+          //var numeroMes=(d.getMonth()+1);
+          return (d=="Urgencia medica"); 
+
+        });*/
+
+
+        var newResultarUrgenciaMedica=[];
+        var newResultarDermatologia=[];
+        var newResultarOftalmologia=[];
+        var newResultarMedicinaGeneral=[];
+        var newResultarCardiologia=[];
+       // var numbers = new Array(1, 4, 9); 
+       var newResultarGastro=[];
+        var newResultarPediatria=[];
+
+        
+        res.data.forEach( function(valor, indice) {
+          var d=res.data[indice].motivo.descripcion;
+   
+          if(d=="Urgencia medica"){
+           // newResultarUrgenciaMedica[indice]=valor[indice];
+          newResultarUrgenciaMedica.push(valor);
+           //console.log(valor);
+          }
+          if(d=="Dermatología"){
+          newResultarDermatologia.push(valor);
+
+          }
+          if(d=="Oftalmología"){
+            newResultarOftalmologia.push(valor);
+  
+          }
+          if(d=="Medicina General"){
+            newResultarMedicinaGeneral.push(valor);
+  
+          }
+          if(d=="Cardiología"){
+            newResultarCardiologia.push(valor);
+  
+          }
+          if(d=="Gastroenterología"){
+            newResultarGastro.push(valor);
+  
+          }
+          if(d=="Pediatría"){
+            newResultarPediatria.push(valor);
+            //Otro modo Sumar con reduce pero consume mas memoria mas efectivo usar forEach
+            // pero en terminos de reducir lineas de codigo es mejor usar reduce
+            //const pediatria3 = newResultarPediatria => newResultarPediatria.reduce((a,b) => a + b, 0)
+          }
+        });
+
+        /* console.log(newResultarUrgenciaMedica);
+         console.log(newResultarDermatologia);*/
+
+         newResultarUrgenciaMedica.forEach( function(valor, indice) {
+
+          urgenciaMedica+= newResultarUrgenciaMedica[indice].montoRecibido;
+        });
+
+        newResultarDermatologia.forEach( function(valor, indice) {
+
+          dermatologia+= newResultarDermatologia[indice].montoRecibido;
+        });
+
+        
+        newResultarOftalmologia.forEach( function(valor, indice) {
+
+          olftalmologia+= newResultarOftalmologia[indice].montoRecibido;
+        });
+
+        newResultarMedicinaGeneral.forEach( function(valor, indice) {
+
+          medicinaGeneral+= newResultarMedicinaGeneral[indice].montoRecibido;
+        });
+     
+
+        newResultarCardiologia.forEach( function(valor, indice) {
+
+          cardiologia+= newResultarCardiologia[indice].montoRecibido;
+        });
+
+
+        newResultarPediatria.forEach( function(valor, indice) {
+
+          pediatria+= newResultarPediatria[indice].montoRecibido;
+        });
+
+        newResultarGastro.forEach( function(valor, indice) {
+
+          gastroenterologia+= newResultarGastro[indice].montoRecibido;
+        });
+
+        //this.ingresosPorEspecialidad=[urgenciaMedica,dermatologia,olftalmologia,medicinaGeneral,cardiologia,gastroenterologia,pediatria];
+        ingresosPorEspecialidadNew=[urgenciaMedica,dermatologia,olftalmologia,medicinaGeneral,cardiologia,gastroenterologia,pediatria];
+        
+        //console.log(this.ingresosPorEspecialidad);
+
+        this.setGraficoCircular("myCircleChart",ingresosPorEspecialidadNew);
+
+
+      }, err => console.log(err)
+    )
   }
 
-  isInside(date: NgbDate) {
-    return date.after(this.fromDate) && date.before(this.toDate);
-  }
+  getNumeroTotalCitas(){
+    this.movimientoCajaService.listar().subscribe(
+      res =>{
+      
+        this.totalCitas= res.data.length;
 
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
-  }
+      }, err => console.log(err)
+    )
 
-  constructor(calendar: NgbCalendar) {
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
+  consoleLogFechaDe(){
+    console.log(this.fechaDe);
+    var d= new Date(this.fechaDe)
+    var fechaDesdeMes= d.getMonth()+1;
+    var fechaDesdeDia= d.getDate()+1; //El date nos da un dia menos por eso se suma
+    var d2= new Date(this.fechaHasta)
+    var fechaDesdeMes2= d2.getMonth()+1;
+    var fechaDesdeDia2= d2.getDate()+1; //El date nos da un dia menos por eso se suma
+    
+    console.log(this.fechaHasta);
+    //console.log(d.getDate());
+    //console.log(fechaDesdeMes+1);
+    this.getDataOfMovimientoCaja(fechaDesdeMes,fechaDesdeDia,fechaDesdeMes2,fechaDesdeDia2,d,d2);
+    
 
-  ngOnInit() {
+    /*
+    
+                var d=new Date(res[index]['fecha']);
+                        var numeroYear=(d.getFullYear());
+    */
   }
-
-  style = {
-    sources: {
-      world: {
-        type: "geojson",
-        data: "assets/world.geo.json"
-      }
-    },
-    version: 8,
-    layers: [
-      {
-        "id": "countries-fill",
-        "type": "fill",
-        "source": "world",
-        "layout": {},
-        "paint": {
-          'fill-color': '#000000',
-        },
-      },
-      {
-        "id": "countries-border",
-        "type": "line",
-        "source": "world",
-        "layout": {},
-        "paint": {
-          'line-color': '#ffffff',
-        },
-      }
-    ]
-  }
-
 }
