@@ -12,7 +12,7 @@ import { PacienteService } from '../services/gestionar-paciente service/paciente
 @Component({
   selector: 'app-gestionar-citas',
   templateUrl: './gestionar-citas.component.html',
-  styleUrls: ['./gestionar-citas.component.css'],
+  styleUrls: ['./gestionar-citas.component.scss'],
   providers: [DatePipe]
 })
 export class GestionarCitasComponent implements OnInit {

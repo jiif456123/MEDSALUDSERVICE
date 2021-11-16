@@ -5,10 +5,14 @@ import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
 import { GestionarCitasComponent } from './GESTIONAR-CITA/gestionar-citas.component';
+import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gestionar-receta-medica.component';
+import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
+import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
+import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
 const routes: Routes = [
   { path: '', redirectTo: '/gestionar-paciente', pathMatch: 'full' },
   {
-    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Consultar Receta Medica' }
   },
   {
     path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
@@ -21,6 +25,18 @@ const routes: Routes = [
   },
   {
     path: "gestionar-citas", component: GestionarCitasComponent, data: { title: 'Gestionar Citas' }
+  },
+  {
+    path: "consultar-receta-medica", component: gestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: 'gestionar-especialidad', component: EspecialidadComponent, data: { title: 'Gestionar Especialidad' }
+  },
+  {
+    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, data: { title: 'Gestionar Especialidad Registrado' }
+  },
+  {
+    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad Actualizar' }
   },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },

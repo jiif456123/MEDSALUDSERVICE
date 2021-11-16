@@ -5,16 +5,14 @@
     <form [formGroup]="formRegistrar" class="row">
         <div class="form-group col-md-6">
             <label for="dni">DNI Paciente</label>
-            <input formControlName="dni" type="text" class="form-control" id="dni"
-                placeholder="..." />
+            <input readonly formControlName="dni" type="text" class="form-control" id="dni" placeholder="..." />
         </div>
 
         <div class="form-group col-md-6">
             <label for="nombrePaciente">Paciente</label>
-            <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente"
-                placeholder="..." />
+            <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
         </div>
-        
+
     </form>
     <div class="row">
 
@@ -25,7 +23,7 @@
                         <th class="text-center">Medicamento</th>
                         <th class="text-center">Forma</th>
                         <th class="text-center">Duracion</th>
-                        <th class="text-center">Cantidad</th>                    
+                        <th class="text-center">Cantidad</th>
                         <th class="text-center">Dosis</th>
                         <th class="text-center">Indicacion</th>
                     </tr>

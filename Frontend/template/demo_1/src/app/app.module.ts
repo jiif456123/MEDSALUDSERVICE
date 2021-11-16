@@ -21,6 +21,10 @@ import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
 import { GestionarCitasComponent } from './GESTIONAR-CITA/gestionar-citas.component';
+import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gestionar-receta-medica.component';
+import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
+import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
+import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -40,6 +44,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContentAnimateDirective,
     consultarserviciocomponent,
     GestionarCitasComponent,
+    gestionarRecetaMedicaComponent,
+    EspecialidadComponent,
+    EspecialidadRegistradoComponent,
+    EspecialidadActualizadoComponent
   ],
   imports: [
     BrowserModule,
