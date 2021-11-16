@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
 import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
+import { GestionarCitasComponent } from './GESTIONAR-CITA/gestionar-citas.component';
 const routes: Routes = [
   { path: '', redirectTo: '/gestionar-paciente', pathMatch: 'full' },
   {
@@ -13,6 +15,12 @@ const routes: Routes = [
   },
   {
     path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: "consultarservicio", component: consultarserviciocomponent, data: { title: 'Consultar Servicio' }
+  },
+  {
+    path: "gestionar-citas", component: GestionarCitasComponent, data: { title: 'Gestionar Citas' }
   },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },

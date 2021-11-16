@@ -32,3 +32,10 @@
                 <i class="icon-screen-desktop menu-icon"></i>
             </a>
         </li>
+        <li class="nav-item" [ngClass]="{ 'active': consultarservicio.isActive }">
+            <a class="nav-link" routerLink="/consultarservicio" routerLinkActive #consultarservicio="routerLinkActive" [routerLinkActiveOptions]="{exact:
+    true}">
+                <span class="menu-title" translate>Consultar Servicio</span>
+                <i class="icon-screen-desktop menu-icon"></i>
+            </a>
+        </li>

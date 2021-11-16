@@ -163,6 +163,17 @@ var detalleRecetaMedica = new Schema({
 });
 var modelDetalleRecetaMedica = mongoose.model('DetalleRecetaMedica', detalleRecetaMedica);
 
+var prueba = new Schema({
+
+    nespecialidad: { type: String },
+    ndoctor: { type: String },
+    descripcion: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelPrueba = mongoose.model('Prueba', prueba);
+
 module.exports = {
     modelPaciente: modelPaciente,
     modelEspecialidad: modelEspecialidad,
@@ -173,5 +184,6 @@ module.exports = {
     modelCita: modelCita,
     modelUser: modelUser,
     modelRecetaMedica: modelRecetaMedica,
-    modelDetalleRecetaMedica: modelDetalleRecetaMedica
+    modelDetalleRecetaMedica: modelDetalleRecetaMedica,
+    modelPrueba: modelPrueba,
 }

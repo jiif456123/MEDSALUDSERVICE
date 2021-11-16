@@ -4,7 +4,6 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
@@ -20,6 +19,8 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
 import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
+import { GestionarCitasComponent } from './GESTIONAR-CITA/gestionar-citas.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -37,6 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegGestionarRecetaMedicaComponent,
     DetalleGestionarRecetaMedicaComponent,
     ContentAnimateDirective,
+    consultarserviciocomponent,
+    GestionarCitasComponent,
   ],
   imports: [
     BrowserModule,
