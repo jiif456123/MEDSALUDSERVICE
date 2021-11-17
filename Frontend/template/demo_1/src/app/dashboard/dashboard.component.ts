@@ -543,7 +543,7 @@ export class Dashboard implements OnInit {
   getNumeroTotalCitas(){
     this.movimientoCajaService.listar().subscribe(
       res =>{
-      
+        
         this.totalCitas= res.data.length;
 
       }, err => console.log(err)
