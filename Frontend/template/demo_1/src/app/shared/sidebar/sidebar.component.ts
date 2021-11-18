@@ -34,7 +34,8 @@ export class SidebarComponent implements OnInit {
 
   public permitirHistoria;
   public permitirGPacienteYGCita;
-public permitirCita;
+  public permitirCita;
+  public permitirReporteGeneral;
   ngOnInit() {
     console.log(this.userAllService.selectedTokenUser.nombre);
       
@@ -69,8 +70,10 @@ public permitirCita;
         
         ){
             this.permitirHistoria=true;
+            this.permitirReporteGeneral=true;
         }else{
           this.permitirHistoria=false;
+          this.permitirReporteGeneral=false;
         }
 
         if(this.rolSideBar=="enfermera"||this.rolSideBar=="Enfermera"||this.rolSideBar=="Enfermero"||this.rolSideBar=="enfermero"){

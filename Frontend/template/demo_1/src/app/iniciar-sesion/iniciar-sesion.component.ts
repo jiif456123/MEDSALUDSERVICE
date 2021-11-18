@@ -45,16 +45,19 @@ export class LoginMComponent implements OnInit {
     this.userAllService.signIn3(form.value.user,form.value.password).subscribe(
 
       res =>{
+
        // console.log(res);
        // console.log("FUNCA RES SIGN");
         localStorage.setItem('idLoginUser', res.id);
-        this.getDataOfUser(res.id);
         
 
 
        // this.userAllService.selectedTokenUser.nombre="hola";
         localStorage.setItem('token',res.token);
-        this.router.navigate(['/dashboard']);
+        
+        console.log(this.rolUsuario);
+        this.getDataOfUser(res.id);
+
         /* //TODO: DEMORA EN RUTA...
         if(this.rolUsuario=="medico"||this.rolUsuario=="Medico"||this.rolUsuario=="doctor"||this.rolUsuario=="Doctor"||
         this.rolUsuario=="paciente"||this.rolUsuario=="Paciente"){
@@ -90,8 +93,15 @@ export class LoginMComponent implements OnInit {
     this.userAllService.getUserById(idUser).subscribe(
       res =>{
         console.log(res);
+        
       this.rolUsuario= res.rol;
-      
+
+      if(this.rolUsuario=="paciente"||this.rolUsuario=="Paciente"){
+        this.router.navigate(['/welcome-page']);
+      }else{
+        this.router.navigate(['/dashboard']);
+      }
+      console.log(this.rolUsuario);
 /*
 
         console.log("GAAAAAAA");

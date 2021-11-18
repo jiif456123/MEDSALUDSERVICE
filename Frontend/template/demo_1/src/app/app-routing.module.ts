@@ -10,6 +10,8 @@ import { GestionarCitasComponent } from './citas/gestionar-citas/gestionar-citas
 import { GestionarHistoriaComponent } from './citas/gestionar-Historia Clinica/gestionar-historia.component'; 
 import { LoginMComponent } from './iniciar-sesion/iniciar-sesion.component';
 import { GestionarPacienteComponent } from './citas/gestionar-paciente/gestionar-paciente.component';
+import { WelcomePage } from './welcome-page/welcom-page.component';
+
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -29,7 +31,8 @@ const routes: Routes = [
   
   {path: "gestionar-historia", component:  GestionarHistoriaComponent , canActivate: [AuthGuard], pathMatch: 'full' },
 
-  {path: 'login', component: LoginMComponent , pathMatch: 'full'}
+  {path: 'login', component: LoginMComponent , pathMatch: 'full'},
+  {path: 'welcome-page', component: WelcomePage, pathMatch: 'full'}
   
 ];
 

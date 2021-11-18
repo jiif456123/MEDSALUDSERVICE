@@ -45,18 +45,19 @@ export class Dashboard implements OnInit {
   //VARIABLES FILTRADO
   public fechaDe;
   public fechaHasta;
-
+  public estado=0;
   public ingresosPorEspecialidad=[];
   public nombres = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
   
    ngOnInit(){//  NEW 
-    this.getDataOfMovimientoCaja("xd","d","dsd","ds",null,null);
+    this.getDataOfMovimientoCaja("xd","d","dsd","ds",null,null,0);
     var nombresSinRepetir = ["Hola", "Xd"];
     var cantidadM = [1,2];  
     var ingresoCitas= [232,444,545];  
     var ingresoFarmacia = [1,2,3,4,5,6,7,8,9,10,11,12];
     this.getDataForCircleChart();
     this.getNumeroTotalCitas();
+    console.log(this.fechaDe);
    // this.setGraficoBarra("myChart",nombresSinRepetir,cantidadM);
    
    // this.setGraficoBarraDoble("myChartBarraDoble",this.nombres,this.ingresoCitasArray,ingresoFarmacia);
@@ -209,7 +210,7 @@ export class Dashboard implements OnInit {
    
 }
   
- getDataOfMovimientoCaja(mesBuscar1: any, diaBuscar1: any, mesBuscar2: any, diaBuscar2: any,startDate: Date, endDate: Date){
+ getDataOfMovimientoCaja(mesBuscar1: any, diaBuscar1: any, mesBuscar2: any, diaBuscar2: any,startDate: Date, endDate: Date,estado:any){
    /*var ingresoEnero,ingresoFebrero,ingresoMarzo,ingresoAbril,ingresoMayo,ingresoJunio,ingresoJulio,ingresoAgosto,ingresoSeptiembre,ingresoOctubre,
     ingresoNoviembre,ingresoDiciembre; */
     var ingresoTotal=0;
@@ -287,13 +288,27 @@ export class Dashboard implements OnInit {
              console.log("Se filtro desde el mes: " + mesBuscar1 + " y dia: " + diaBuscar1 + " HASTA el mes: " + mesBuscar2 + " y dia: " + diaBuscar2);
             // console.log(fechaDesdeDia);
           }*/
+          
+          //TODO: ddwdwd
 
-          if( (d>startDate) && (d<endDate) ){
+          if(estado==0){
+            var dat1= new Date("Thu Dec 31 2020 19:00:00 GMT-0500 (hora estándar de Perú)");
+            var dat2= new Date("Thu Dec 30 2021 19:00:00 GMT-0500 (hora estándar de Perú)");
+            if( (d>dat1) && (d<dat2) ){
               console.log("filtro");
               arrayFiltradoMes.push(valor);
-              console.log(arrayFiltradoMes);
-          }
+              
+            }
 
+          }else{
+          
+            if( (d>startDate) && (d<endDate) ){
+              console.log("filtro");
+              arrayFiltradoMes.push(valor);
+              console.log(startDate);
+              console.log(endDate);
+            }
+          }
          //console.log("JAAA"+arrayFiltradoMes);
 
         });
@@ -551,6 +566,7 @@ export class Dashboard implements OnInit {
 
   }
   consoleLogFechaDe(){
+    this.estado=1;
     console.log(this.fechaDe);
     var d= new Date(this.fechaDe)
     var fechaDesdeMes= d.getMonth()+1;
@@ -562,8 +578,8 @@ export class Dashboard implements OnInit {
     console.log(this.fechaHasta);
     //console.log(d.getDate());
     //console.log(fechaDesdeMes+1);
-    this.getDataOfMovimientoCaja(fechaDesdeMes,fechaDesdeDia,fechaDesdeMes2,fechaDesdeDia2,d,d2);
-    
+    this.getDataOfMovimientoCaja(fechaDesdeMes,fechaDesdeDia,fechaDesdeMes2,fechaDesdeDia2,d,d2,1);
+    console.log(d);
 
     /*
     

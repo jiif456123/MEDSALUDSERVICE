@@ -39,7 +39,15 @@
 
                         <td class="text-center">{{ h.fecha | date: "dd/MM/yyyy" }}</td>
 
-                        <td class="text-center"></td>
+                        <td class="text-center">
+                            <button (click)="abrirModalDetalles(h)" class="btn btn-success btn-sm btn-block">
+                                <i class="mdi mdi-update mdi-18px">Detalles</i>
+                            </button>
+                            <input data-toggle="modal" data-target="#modalDetalles" #modalDetalles type="hidden" name="button" />
+
+                            <!-- <button class="btn btn-danger" style="margin-left: 1005px;" type="button" (click)="downloadPDF()"> <span> <i class="fa fa-file-pdf-o"></i></span> Descargar PDF</button>-->
+
+                        </td>
                         <td class="text-center">
                             <button (click)="abrirModalModificar(h)" class="btn btn-success btn-sm btn-block">
                                 <i class="mdi mdi-update mdi-18px">Actualizar</i>
@@ -211,6 +219,94 @@
             <div class="modal-footer">
                 <button type="button" (click)="modificar()" class="btn btn-primary">
                     Modificar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal para detalles-->
+
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalDetalles" aria-hidden="true" id="modalDetalles">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div *ngIf="formHistoriaDetalles" class="modal-body">
+                <form [formGroup]="formHistoriaDetalles" class="row">
+                    <div class="form-group col-md-12">
+                        <label for="medico">Medico</label>
+                        <input formControlName="medico" type="text" class="form-control" id="medico" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="especialidad">Especialidad</label>
+                        <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Dental">Dental</option>
+                            <option value="Obtetricia">Obtetricia</option>
+                            <option value="Pediatria">Pediatria</option>
+                          </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="pesoNum">DNI Paciente</label>
+                        <input formControlName="pesoNum" type="text" class="form-control" id="pesoNum" placeholder="" readonly/>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="peso">Peso(Kilogramos)</label>
+                        <input formControlName="peso" type="text" class="form-control" id="peso" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="altura">Altura(metros)</label>
+                        <input formControlName="altura" type="text" class="form-control" id="altura" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tension">Presión</label>
+                        <input formControlName="tension" type="text" class="form-control" id="tension" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="alergias">Alergias</label>
+                        <textarea formControlName="alergias" type="text" class="form-control" id="alergias" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="fecha">Fecha</label>
+                        <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="antecedentes">Evolución del paciente</label>
+                        <textarea formControlName="antecedentes" type="text" class="form-control" id="antecedentes" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="historia">Historia</label>
+                        <textarea formControlName="historia" type="text" class="form-control" id="historia" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="diagnostico">Diagnostico</label>
+                        <textarea formControlName="diagnostico" type="text" class="form-control" id="diagnostico" placeholder=""></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="downloadPDF()" class="btn btn-danger">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Generar PDF
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cerrar

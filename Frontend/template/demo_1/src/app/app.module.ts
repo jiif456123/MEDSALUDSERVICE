@@ -43,6 +43,8 @@ import { GestionarPacienteComponent } from './citas/gestionar-paciente/gestionar
 //citaVirtual
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
+import { WelcomePage } from './welcome-page/welcom-page.component';
+
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {withCredentials: '*'}};
 
 //import { BrowserModule  } from '@angular/platform-browser';
@@ -68,7 +70,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GestionarCitasComponent,
     GestionarHistoriaComponent,
     LoginMComponent,
-    GestionarPacienteComponent
+    GestionarPacienteComponent,
+    WelcomePage
   ],
   imports: [
     BrowserModule,

@@ -42,6 +42,7 @@
         "compass-mixins": "^0.12.10",
         "flag-icon-css": "^3.5.0",
         "jquery": "^3.5.1",
+        "jspdf": "^2.4.0",
         "mapbox-gl": "^1.12.0",
         "moment": "^2.29.1",
         "moment-range": "^4.0.2",
