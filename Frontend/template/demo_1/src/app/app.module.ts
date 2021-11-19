@@ -38,6 +38,10 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './citas/services/token-interceptor.service';
 
 import { GestionarPacienteComponent } from './citas/gestionar-paciente/gestionar-paciente.component';
+
+import { CambiarContraComponent } from './citas/cambiar-password/cambiarpassword.component';
+
+import { GestionarServiciosComponent } from './citas/gestionar-servicios/gestionar-servicios.component';
 // AoT requires an exported function for factories
 
 //citaVirtual
@@ -71,7 +75,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     GestionarHistoriaComponent,
     LoginMComponent,
     GestionarPacienteComponent,
-    WelcomePage
+    WelcomePage,
+    CambiarContraComponent,
+    GestionarServiciosComponent,
   ],
   imports: [
     BrowserModule,

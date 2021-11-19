@@ -164,6 +164,31 @@ var detalleRecetaMedica = new Schema({
 });
 var modelDetalleRecetaMedica = mongoose.model('DetalleRecetaMedica', detalleRecetaMedica);
 
+var consultarhorario = new Schema({
+    especialidad: { type: String },
+    fecha: { type: Number },
+    horario: { type: String },
+    doctor: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelconsultarhorario = mongoose.model('consultarhorario', consultarhorario);
+
+
+var serviciospo = new Schema({
+    nombre: { type: String },
+    descripcion: { type: String },
+    medico: { type: String },
+    precio: { type: Number },
+    fecha: { type: Date },
+}, {
+    versionKey: false
+});
+
+var modelserviciospo = mongoose.model('serviciospo', serviciospo);
+
+
 module.exports = {
     modelPaciente: modelPaciente,
     modelEspecialidad: modelEspecialidad,
@@ -174,5 +199,7 @@ module.exports = {
     modelCita: modelCita,
     modelUser: modelUser,
     modelRecetaMedica: modelRecetaMedica,
-    modelDetalleRecetaMedica: modelDetalleRecetaMedica
+    modelDetalleRecetaMedica: modelDetalleRecetaMedica,
+    modelconsultarhorario: modelconsultarhorario,
+    modelserviciospo: modelserviciospo,
 }
