@@ -21,4 +21,8 @@ export class ConsultarService {
   actualizar(id: string, query: any) {
     return this.http.put<any>(`${this.urlEndPoint}/${id}`, query);
   }
+
+  eliminar(_id: string) {
+    return this.http.delete<any>(`${this.urlEndPoint}/${_id}`);
+  };
 }

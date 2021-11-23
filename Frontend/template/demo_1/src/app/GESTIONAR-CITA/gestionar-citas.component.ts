@@ -42,6 +42,20 @@ export class GestionarCitasComponent implements OnInit {
     }
   ]
 
+  doctor = [
+    {
+    doc: 'Dr. Rivera',
+  }, {
+    doc: 'Dr. Huerta',
+  }, {
+    doc: 'Dr. Torres',
+  },
+  {
+    doc: 'Dr. Santos',
+  },
+  ]
+
+
   filtro = "";
 
   pacientes: Paciente[] = [];
