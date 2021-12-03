@@ -87,10 +87,7 @@ export class CitaVirtualComponent implements OnInit {
 
 
   dirigirSala(sala: string, pacienteID: string){
-    /*
-    let element: HTMLElement =document.getElementById('getDatosPacienteID') as HTMLElement;
-              
-    element.click();*/
+  
     this.historiaService.getHistoriaByPacienteIDS(pacienteID).subscribe(
       res =>{
 

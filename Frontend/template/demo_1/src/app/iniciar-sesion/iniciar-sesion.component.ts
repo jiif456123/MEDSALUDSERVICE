@@ -96,7 +96,7 @@ export class LoginMComponent implements OnInit {
         
       this.rolUsuario= res.rol;
 
-      if(this.rolUsuario=="paciente"||this.rolUsuario=="Paciente"){
+      if(this.rolUsuario=="paciente"||this.rolUsuario=="Paciente"||this.rolUsuario=="medico"||this.rolUsuario=="Medico"){
         this.router.navigate(['/welcome-page']);
       }else{
         this.router.navigate(['/dashboard']);
@@ -116,5 +116,8 @@ export class LoginMComponent implements OnInit {
       err => console.error(err)
     )
   }
+
+
+  
 
 }

@@ -24,7 +24,23 @@
             <span class="nav-link" translate>SERVICIOS DOMICILIO</span>
         </li>
 
+        <ng-container *ngIf="permitirCita==true">
+            <li class="nav-item" [ngClass]="{ 'active': welcomePage.isActive }">
+                <a class="nav-link" routerLink="/welcome-page" routerLinkActive #welcomePage="routerLinkActive" [routerLinkActiveOptions]="{exact:
+        true}">
+                    <span class="menu-title" translate>Bienvenida</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item" [ngClass]="{ 'active': citaVirtual.isActive }">
+                <a class="nav-link" routerLink="/cita-virtual" routerLinkActive #citaVirtual="routerLinkActive" [routerLinkActiveOptions]="{exact:
+        true}">
+                    <span class="menu-title" translate>Cita Virtual</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
 
+        </ng-container>
 
         <ng-container *ngIf="permitirReporteGeneral==true">
             <li class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
@@ -40,17 +56,7 @@
 
 
 
-        <ng-container *ngIf="permitirCita==true">
 
-            <li class="nav-item" [ngClass]="{ 'active': citaVirtual.isActive }">
-                <a class="nav-link" routerLink="/cita-virtual" routerLinkActive #citaVirtual="routerLinkActive" [routerLinkActiveOptions]="{exact:
-        true}">
-                    <span class="menu-title" translate>Cita Virtual</span>
-                    <i class="icon-screen-desktop menu-icon"></i>
-                </a>
-            </li>
-
-        </ng-container>
 
         <ng-container *ngIf="permitirHistoria==true">
 
@@ -83,4 +89,23 @@
                 </a>
             </li>
 
+        </ng-container>
+
+        <ng-container *ngIf="permitirGestionarServiAndCambiarC==true">
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarServicios.isActive }">
+                <a class="nav-link" routerLink="/gestionar-servicios" routerLinkActive #gestionarServicios="routerLinkActive" [routerLinkActiveOptions]="{exact:
+    true}">
+                    <span class="menu-title" translate>Gestionar Servicios</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{ 'active': cambiarContra.isActive }">
+                <a class="nav-link" routerLink="/cambiarc" routerLinkActive #cambiarContra="routerLinkActive" [routerLinkActiveOptions]="{exact:
+    true}">
+                    <span class="menu-title" translate>Cambiar Contraseña</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
         </ng-container>

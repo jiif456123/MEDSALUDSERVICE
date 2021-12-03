@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import { UserAllService } from 'src/app/citas/services/usersAll.service';
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -36,6 +35,7 @@ export class SidebarComponent implements OnInit {
   public permitirGPacienteYGCita;
   public permitirCita;
   public permitirReporteGeneral;
+  public permitirGestionarServiAndCambiarC;
   ngOnInit() {
     console.log(this.userAllService.selectedTokenUser.nombre);
       
@@ -78,8 +78,10 @@ export class SidebarComponent implements OnInit {
 
         if(this.rolSideBar=="enfermera"||this.rolSideBar=="Enfermera"||this.rolSideBar=="Enfermero"||this.rolSideBar=="enfermero"){
             this.permitirGPacienteYGCita=true;
+            this.permitirGestionarServiAndCambiarC=true;
         }else{
           this.permitirGPacienteYGCita=false;
+          this.permitirGestionarServiAndCambiarC=false;
         }
         
         if(this.rolSideBar=="paciente"||this.rolSideBar=="Paciente"||this.rolSideBar=="Medico"||this.rolSideBar=="medico"||this.rolSideBar=="Doctor"||this.rolSideBar=="doctor"){
