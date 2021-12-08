@@ -5,4 +5,5 @@ export interface Serviciospo {
     medico: string;
     precio: number;
     fecha: Date;
+    fotoUrl: string;
 }

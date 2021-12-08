@@ -182,6 +182,7 @@ var serviciospo = new Schema({
     medico: { type: String },
     precio: { type: Number },
     fecha: { type: Date },
+    fotoUrl: { type: String }
 }, {
     versionKey: false
 });

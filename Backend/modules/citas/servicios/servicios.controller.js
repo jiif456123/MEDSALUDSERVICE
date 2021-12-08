@@ -2,7 +2,35 @@ const http = require('../../../utils/http');
 const code = require('../../../utils/status');
 const router = require('express').Router();
 const userService = require("./servicios.services");
+/*
+const multer = require('multer');
 
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'upl')
+    },
+    filename: function(req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`)
+    }
+})
+
+const upload = multer({ storage: storage })
+
+exports.upload2 = upload.single('myFile')
+
+exports.uploadFile = (req, res) => {
+        res.send({ data: 'Enviar un archivo' })
+    }
+    
+
+router.post(
+        `/imagen`,
+        this.uploadFile,
+        this.upload2
+
+    )
+    */
 //método para agregar
 router.post('/', (req, res) => {
         let user = req.body;
@@ -62,5 +90,7 @@ router.delete('/:id', (req, res) => {
             http.err(req, res, code.status.Internal_Server_Error, err);
         })
 });
+
+
 
 module.exports = router;

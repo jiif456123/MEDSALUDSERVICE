@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 import { Serviciospo } from '../models/serviciospo.model';
 import { ServiciosService } from '../services/servicios.service';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-gestionar-servicios',
   templateUrl: './gestionar-servicios.component.html',
@@ -13,21 +13,30 @@ import { ServiciosService } from '../services/servicios.service';
   providers: [DatePipe]
 })
 export class GestionarServiciosComponent implements OnInit {
+
+  imagenJA="http://localhost:3000/uploads/1638942271703-Cs go 3.png";
+  public urlImagenServicio="";
+  public avanzar=0;
+  urlImagenMostrarWeb="";
   @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
   @ViewChild('modalModificar') modalModificar: ElementRef;
   @ViewChild('modalDetalle') modalDetalle: ElementRef;
+  @ViewChild('fileInput', {static:false}) fileInput: ElementRef;
+  @ViewChild('fileInput2', {static:false}) fileInput2: ElementRef;
 
+  @ViewChild('botonUploadImage') botonUploadImagen: ElementRef;
   formPaciente: FormGroup;
   formPacienteModificar: FormGroup;
-
+//http://localhost:3000/uploads/serviceImg/1638948243613-wUZ5RnCOXr.jpg
   filtro = "";
-
+  
   servicios: Serviciospo[] = []
   servicioSeleccionado: Serviciospo;
   constructor(
     private servicioService: ServiciosService,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private http: HttpClient
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -50,7 +59,33 @@ export class GestionarServiciosComponent implements OnInit {
     })
 
   }
+////http://localhost:3000/uploads/serviceImg/1638948243613-wUZ5RnCOXr.jpg
 
+
+/*
+setTimeout(() => {
+
+      this.onFileUpload();
+    }, 2000);
+*/
+   onFileUpload(){
+    const imageBlob = this.fileInput.nativeElement.files[0];
+    const file = new FormData();
+    file.set('file', imageBlob);
+      this.http.post('http://localhost:3000/virtual/imagen',file).subscribe(response =>{
+      this.urlImagenServicio= "http://localhost:3000/uploads/serviceImg/"+response["data2"];
+      console.log(response);
+    })
+  }
+  onFileUpload2(){
+    const imageBlob = this.fileInput2.nativeElement.files[0];
+    const file = new FormData();
+    file.set('file', imageBlob);
+      this.http.post('http://localhost:3000/virtual/imagen',file).subscribe(response =>{
+      this.urlImagenServicio= "http://localhost:3000/uploads/serviceImg/"+response["data2"];
+      console.log(response);
+    })
+  }
   abrirModal() {
     this.modalRegistrar.nativeElement.click();
   }
@@ -58,6 +93,7 @@ export class GestionarServiciosComponent implements OnInit {
   abrirModalDetalle(row: Serviciospo) {
     this.modalDetalle.nativeElement.click();
     this.servicioSeleccionado = row;
+    this.urlImagenMostrarWeb= row.fotoUrl;
   }
 
   abrirModalModificar(row: Serviciospo) {
@@ -67,6 +103,7 @@ export class GestionarServiciosComponent implements OnInit {
     this.formPacienteModificar.controls.descripcion.setValue(row.descripcion);
     this.formPacienteModificar.controls.medico.setValue(row.medico);
     this.formPacienteModificar.controls.precio.setValue(row.precio);
+    this.urlImagenMostrarWeb= row.fotoUrl;
     this.formPacienteModificar.controls.fecha.setValue(this.datePipe.transform(row.fecha, 'yyyy-MM-dd'));
   }
 
@@ -74,7 +111,10 @@ export class GestionarServiciosComponent implements OnInit {
     return `${fecha.getFullYear()}-${fecha.getMonth() + 1}-${fecha.getDate()}`
   }
 
+
+
   async registrar() {
+   // this.botonUploadImagen.nativeElement.click();
 
     if (this.formPaciente.invalid) {
       Swal.fire('Advertencia', 'Revise los campos.', 'warning')
@@ -90,16 +130,24 @@ export class GestionarServiciosComponent implements OnInit {
       return;
     }
     
+
+
+ 
+    if(this.urlImagenServicio==""){
+      Swal.fire('Advertencia', 'Ingrese una imagen para el servicio', 'warning')
+      return;
+    }
     let query = {
       nombre: datos.nombre,
       descripcion: datos.descripcion,
       medico: datos.medico,
       precio: datos.precio,
       fecha: datos.fecha,
+      fotoUrl: this.urlImagenServicio
     }
-
+    
     try {
-
+      
       let response = await this.servicioService.registrar(query).toPromise();
       Swal.fire('Correcto', 'Se registro correctamente', 'success')
 
@@ -110,7 +158,23 @@ export class GestionarServiciosComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  
+    
+  
   }
+
+  
+  registarConFoto(){
+    this.onFileUpload();
+
+    setTimeout(() => {
+
+      this.registrar();
+      
+    }, 1000);
+  }
+
+  
 
   async modificar() {
     if (this.formPacienteModificar.invalid) {
@@ -127,12 +191,14 @@ export class GestionarServiciosComponent implements OnInit {
       return;
     }
 
+   
     let query = {
         nombre: datos.nombre,
         descripcion: datos.descripcion,
         medico: datos.medico,
         precio: datos.precio,
         fecha: datos.fecha,
+        fotoUrl: this.urlImagenServicio
     }
 
     try {
@@ -146,7 +212,15 @@ export class GestionarServiciosComponent implements OnInit {
       console.log(err);
     }
   }
+   modificarConFoto(){
+    this.onFileUpload2();
 
+    setTimeout(() => {
+
+      this.modificar();
+      
+    }, 1000);
+  }
   async cambiarEstado(estado: number, id: string) {
     let query = {
       estado: estado
@@ -163,5 +237,7 @@ export class GestionarServiciosComponent implements OnInit {
       console.log(err);
     }
   }
+
+
 
 }

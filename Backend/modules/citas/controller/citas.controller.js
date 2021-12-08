@@ -10,7 +10,9 @@ const especialidadController = require('../../citas/Especialidad/gestespecialida
 const receMedicaController = require('../../citas/recetaMedica/recetaMedica.controller');
 const horarioController = require('../../citas/consultar/horario.controller')
 const serviciosController = require('../../citas/servicios/servicios.controller')
+const uploadController = require('../../citas/servicios/upload')
 jwt = require('jsonwebtoken');
+//const express = require('express');
 
 router.use('/paciente', pacienteController);
 router.use('/motivo', motivoController);
@@ -23,6 +25,7 @@ router.use('/gestionar-especialidad', especialidadController);
 router.use('/receta-medica', receMedicaController);
 router.use('/horario', horarioController);
 router.use('/servicios', serviciosController);
+router.use('/imagen', uploadController);
 
 function verifyToken(req, res, next) {
 

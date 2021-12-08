@@ -1,6 +1,8 @@
 const citasmodel = require("../../../models/citas.model");
 const usermodel = citasmodel.modelserviciospo
 
+
+
 let crear = (user) => {
 
     let newuser = new usermodel({
@@ -10,12 +12,14 @@ let crear = (user) => {
         medico: user.medico,
         precio: user.precio,
         fecha: user.fecha,
-
+        fotoUrl: user.fotoUrl
+            //imagePath
     })
 
     console.log(newuser);
 
     return new Promise((resolve, reject) => {
+
         newuser.save(newuser, (err, data) => {
             if (err) reject(err)
             resolve(data)
