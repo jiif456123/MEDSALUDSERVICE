@@ -49,6 +49,16 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 import { WelcomePage } from './welcome-page/welcom-page.component';
 
+//modulo lau
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
+import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gestionar-receta-medica.component';
+import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
+import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
+import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
+
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {withCredentials: '*'}};
 
 //import { BrowserModule  } from '@angular/platform-browser';
@@ -78,6 +88,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     WelcomePage,
     CambiarContraComponent,
     GestionarServiciosComponent,
+
+    GestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent,
+    consultarserviciocomponent,
+    gestionarRecetaMedicaComponent,
+    EspecialidadComponent,
+    EspecialidadRegistradoComponent,
+    EspecialidadActualizadoComponent,
   ],
   imports: [
     BrowserModule,

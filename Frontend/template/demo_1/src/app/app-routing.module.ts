@@ -14,6 +14,15 @@ import { WelcomePage } from './welcome-page/welcom-page.component';
 import { CambiarContraComponent } from './citas/cambiar-password/cambiarpassword.component';
 import { GestionarServiciosComponent } from './citas/gestionar-servicios/gestionar-servicios.component';
 
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { consultarserviciocomponent } from './Consultar-Servicio/consultar-servicio.component';
+import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gestionar-receta-medica.component';
+import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
+import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
+import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
+
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -34,12 +43,41 @@ const routes: Routes = [
   {path: "gestionar-historia", component:  GestionarHistoriaComponent , canActivate: [AuthGuard], pathMatch: 'full' },
   {path: "cambiarc", component:  CambiarContraComponent , canActivate: [AuthGuard], pathMatch: 'full' },
 
+  {
+    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Consultar Receta Medica' }
+  },
+  {
+    path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: "consultarservicio", component: consultarserviciocomponent, data: { title: 'Consultar Servicio' }
+  },
+  {
+    path: "gestionar-citas", component: GestionarCitasComponent, data: { title: 'Gestionar Citas' }
+  },
+  {
+    path: "consultar-receta-medica", component: gestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: 'gestionar-especialidad', component: EspecialidadComponent, data: { title: 'Gestionar Especialidad' }
+  },
+  {
+    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, data: { title: 'Gestionar Especialidad Registrado' }
+  },
+  {
+    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad Actualizar' }
+  },
+
   {path: 'login', component: LoginMComponent , pathMatch: 'full'},
   {path: 'welcome-page', component: WelcomePage, pathMatch: 'full'},
   {path: "gestionar-servicios", component:  GestionarServiciosComponent , canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'presentarhome', loadChildren: ()=> import('./Presentar Home/presentar-home.module').then(m => m.PresentarHomeModule)},
   { path: 'laboratorio', loadChildren: ()=> import('./Laboratorio/laboratorio.module').then(m => m.LaboratorioModule)},
-
+  { path: 'gestionar-historia', loadChildren: ()=> import('./Gestionar-Historica-Clinica/gestionar-historia.module').then(m => m.gestionarhistoriaModule)},
+  { path: 'consultaragenda', loadChildren: ()=> import('./consultarhorario/consultarhorario.module').then(m => m.ConsultarhorarioModule)},
 ];
 
 @NgModule({

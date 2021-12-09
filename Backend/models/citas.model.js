@@ -166,7 +166,7 @@ var modelDetalleRecetaMedica = mongoose.model('DetalleRecetaMedica', detalleRece
 
 var consultarhorario = new Schema({
     especialidad: { type: String },
-    fecha: { type: Number },
+    fecha: { type: Date },
     horario: { type: String },
     doctor: { type: String },
 }, {

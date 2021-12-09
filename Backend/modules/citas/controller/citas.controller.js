@@ -12,6 +12,7 @@ const horarioController = require('../../citas/consultar/horario.controller');
 const serviciosController = require('../../citas/servicios/servicios.controller');
 const uploadController = require('../../citas/servicios/upload');
 const especialController = require('../../citas/especial/especial.controller');
+const consultarhorario = require('../consultarHorario/horario.Controller');
 
 jwt = require('jsonwebtoken');
 //const express = require('express');
@@ -29,6 +30,7 @@ router.use('/horario', horarioController);
 router.use('/servicios', serviciosController);
 router.use('/imagen', uploadController);
 router.use('/especial', especialController);
+router.use('/consultarhorario', consultarhorario);
 
 function verifyToken(req, res, next) {
 
