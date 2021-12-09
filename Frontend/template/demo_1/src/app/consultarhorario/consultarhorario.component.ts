@@ -40,7 +40,7 @@ export class ConsultarhorarioComponent implements OnInit {
   formHorariosModificar: FormGroup;
 
   formFiltrar: FormGroup;
-
+filtro:"";
   horarios: Consultarhorario[] = [];
 
   public horario: Consultarhorario = new Consultarhorario();
@@ -252,7 +252,7 @@ export class ConsultarhorarioComponent implements OnInit {
       this.horarios = data.data
     }
 
-    
+
     async eliminar(_id){
       var data=await this.ConsultarhorarioService.listar().toPromise();
       this.horarios = data.data
