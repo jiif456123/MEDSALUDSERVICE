@@ -8,9 +8,11 @@ const citaController = require('../cita/cita.controller');
 const userController = require('../user/user.controller')
 const especialidadController = require('../../citas/Especialidad/gestespecialidad.controller');
 const receMedicaController = require('../../citas/recetaMedica/recetaMedica.controller');
-const horarioController = require('../../citas/consultar/horario.controller')
-const serviciosController = require('../../citas/servicios/servicios.controller')
-const uploadController = require('../../citas/servicios/upload')
+const horarioController = require('../../citas/consultar/horario.controller');
+const serviciosController = require('../../citas/servicios/servicios.controller');
+const uploadController = require('../../citas/servicios/upload');
+const especialController = require('../../citas/especial/especial.controller');
+
 jwt = require('jsonwebtoken');
 //const express = require('express');
 
@@ -26,6 +28,7 @@ router.use('/receta-medica', receMedicaController);
 router.use('/horario', horarioController);
 router.use('/servicios', serviciosController);
 router.use('/imagen', uploadController);
+router.use('/especial', especialController);
 
 function verifyToken(req, res, next) {
 

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Policlínico MedSalud</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Aca es donde importas el estilo kgada-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Presentar Home/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="http://localhost:4200/presentarhome">
+                <img src="../../assets/images/presentarhomeimagenes/medsaludlog.svg" width="150" height="70" alt="">
+            </a>
+
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:4200/presentarhome">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.google.com/maps/place/Servicios+Médicos+Dr.+Garnica/@-12.0090577,-77.0126674,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPWNQSvuPIa7_hbOhaa5P35g01rwOhRZ_Ctn72E!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPWNQSvuPIa7_hbOhaa5P35g01rwOhRZ_Ctn72E%3Dw203-h114-k-no!7i3104!8i1746!4m14!1m8!3m7!1s0x0:0xd9c951b8bb2b7da6!2sServicios+Médicos+Dr.+Garnica!8m2!3d-12.0090577!4d-77.0126674!14m1!1BCgIgAQ!3m4!1s0x0:0xd9c951b8bb2b7da6!8m2!3d-12.0090577!4d-77.0126674">Ubicacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca de Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/DR.GARNICA">Conoce mas</a>
+                </li>
+                <li class="nav-item">
+                    <button (click)="abrirModal()" type="button" class="btn btn-outline-primary" style="margin-bottom: 10px; float: left">
+                <i class="mdi mdi-pencil mdi-18px">REGISTRAR </i>
+                <input data-toggle="modal" data-target="#modalRegistrar" #modalRegistrar type="hidden" name="button" />
+            </button>
+                </li>
+                <li class="nav-item">
+                    <td class="text-center">
+                        <button type="button" role="button" class="btn btn-secondary ml-2" routerLink='/login'>
+                            INICIAR SESION
+                        </button>
+                    </td>
+                </li>
+                <li class="nav-item">
+                    <td class="text-center">
+                        <button type="button" (click)="prueba()" class="btn btn-primary">
+                            Registrar
+                        </button>
+                    </td>
+                </li>
+            </ul>
+        </nav>
+        <div class="cover d-flex justify-content-center align-items-center flex-column">
+            <h1>
+                POLICLINICO MEDSALUD
+            </h1>
+
+            <p>
+                UN SISTEMA DE SALUD PENSANDO EN SUS PACIENTES
+            </p>
+        </div>
+    </header>
+
+    <section>
+        <p class="text-center">
+        </p>
+        <h1 class="text-center">
+            Noticias y Eventos
+        </h1>
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//Noticias//Noticia1.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Covid-19: vacunación a menores de 12 a 17 años</h5>
+                            <p class="card-text">El titular de Salud sostuvo que "está debidamente comprobado que no hay ningún problema con las vacunas, en cualquiera de las marcas," y que la inmunización a los más pequeños tiene como objetivo hacer realidad el inicio de
+                                las clases en los colegios.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images/presentarhomeimagenes//aspirina.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Vuelco en aspirina diaria revela defecto de la medicina</h5>
+                            <p class="card-text">La medicina no es exactamente una ciencia, es una conbinación de cosas, con algo de ciencia en la mezcla. Hay una razón por la que tenemos un movimiento de medicina basado en la ciencia, pero no un movimiento de física basado
+                                en la ciencia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images/presentarhomeimagenes//equipos.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Precios de implementos médicos al alza por dificultades en suministros</h5>
+                            <p class="card-text">Factores como el incremento en el tipo de cambio, han propiciando una subida en el costo de implementos médicos y medicinas, entre los que se encuentran aquellos para tratar la COVID-19, informó el gremio de la Salud de la
+                                Cámara de Comercio de Lima.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div>
+                    <img src="../../assets/images/presentarhomeimagenes/medsaludlog.svg" />
+                </div>
+                <div class="col-12 col-sm-6">
+                    <h3>
+                        !Bienvenidos al Policlínico MEDSALUD
+                    </h3>
+                    <h4>
+                        Donde brindamos un servicio de salud seguro, cálido y humano a nuestros pacientes, consiguiendo la excelencia en sanidad privada de salud.
+                    </h4>
+                    <p>
+                        <a class="nav-link" href="https://www.facebook.com/DR.GARNICA">Encuentranos por facebook</a>
+                    </p>
+                    <a href="https://www.google.com/maps/place/Servicios+Médicos+Dr.+Garnica/@-12.0090577,-77.0126674,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPWNQSvuPIa7_hbOhaa5P35g01rwOhRZ_Ctn72E!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPWNQSvuPIa7_hbOhaa5P35g01rwOhRZ_Ctn72E%3Dw203-h114-k-no!7i3104!8i1746!4m14!1m8!3m7!1s0x0:0xd9c951b8bb2b7da6!2sServicios+Médicos+Dr.+Garnica!8m2!3d-12.0090577!4d-77.0126674!14m1!1BCgIgAQ!3m4!1s0x0:0xd9c951b8bb2b7da6!8m2!3d-12.0090577!4d-77.0126674"> Ir al mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <p class="text-center">
+        </p>
+        <h1 class="text-center">
+            Especialidades del Policlínico
+        </h1>
+        <div class="container mt-5 mb-5">
+            <div class="product-stripe">
+                <div class="stripe-container">
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets//images//ImagenesParaCarrusel//MedicinaGeneral.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Medicina General</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Medicina General</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaCarrusel/Dermatologia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Dermatologia</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Dermatologia</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaCarrusel/Cardiologia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cardiologia</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Cardiologia</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaCarrusel/Gastroenterología.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Gastroenterología</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Gastroenterología</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaCarrusel//Pediatria.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Pediatria</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Pediatria</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaCarrusel/Oftalmologia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Oftalmologia</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Oftalmologia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <p class="text-center">
+        </p>
+        <h1 class="text-center">
+            Servicios Auxiliares del Policlínico
+        </h1>
+        <div class="container mt-5 mb-5">
+            <div class="product-stripe">
+                <div class="stripe-container">
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets//images//ImagenesParaNoSeQue/Ecografia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ecografía</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Ecografía</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaNoSeQue//Farmacia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Farmacia</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Farmacia</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images/ImagenesParaNoSeQue//Vacuna.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Inyectables</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Inyectables</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaNoSeQue//Radiografia.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Radiografia</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Radiografia</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaNoSeQue//Optica.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Optica</h5>
+                            <a href="#" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Optica</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div title="Servicios de medicina" class="cover cover-small" style="background-image:url(../../assets/images//ImagenesParaNoSeQue//LabCLinico.jpg);">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Laboratorio CLinico</h5>
+                            <a href="http://localhost:4200/laboratorio" class="btn btn-secondary btn-lg active text-center" role="button" aria-pressed="true">Laboratorio Clinico</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container mt-5 mb-5">
+            <h4>
+                Aquí nos encontramos:
+            </h4>
+            <p>
+                766 Las Coralinas, Cercado de Lima, Provincia de Lima
+            </p>
+            <div class="responsive-iframe">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15610.000123186213!2d-77.01266735839206!3d-12.00905771486489!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd9c951b8bb2b7da6!2sServicios%20M%C3%A9dicos%20Dr.%20Garnica!5e0!3m2!1ses-419!2spe!4v1634853316780!5m2!1ses-419!2spe"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> </div>
+        </div>
+    </section>
+</body>
+<footer class="footer">
+    <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © POLICLINICO MEDSALUD 2021</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Dr. Garnica</span>
+    </div>
+</footer>
+
+</html>
+
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalRegistrar" aria-hidden="true" id="modalRegistrar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div *ngIf="formPaciente" class="modal-body">
+                <form [formGroup]="formPaciente" class="row">
+                    <div class="form-group col-md-12">
+                        <label for="nombre">Nombre</label>
+                        <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="apellidoPaterno">Apeliido Paterno</label>
+                        <input formControlName="apellidoPaterno" type="text" class="form-control" id="apellidoPaterno" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="apellidoMaterno">Apellido Materno</label>
+                        <input formControlName="apellidoMaterno" type="text" class="form-control" id="apellidoMaterno" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dni">DNI</label>
+                        <input formControlName="dni" type="text" class="form-control" id="dni" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="celular">Celular</label>
+                        <input formControlName="celular" type="text" class="form-control" id="celular" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="email">Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="email" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="fechaNacimiento">Fecha Nacimiento</label>
+                        <input formControlName="fechaNacimiento" type="date" class="form-control" id="fechaNacimiento" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="direccion">Direccion</label>
+                        <input formControlName="direccion" type="text" class="form-control" id="direccion" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nombreFamiliar">Nombre Familiar</label>
+                        <input formControlName="nombreFamiliar" type="text" class="form-control" id="nombreFamiliar" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dniFamiliar">DNI Familiar</label>
+                        <input formControlName="dniFamiliar" type="text" class="form-control" id="dniFamiliar" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="parentesco">Parentesco</label>
+                        <input formControlName="parentesco" type="text" class="form-control" id="parentesco" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="celularFamiliar">Celular Familiar</label>
+                        <input formControlName="celularFamiliar" type="text" class="form-control" id="celularFamiliar" placeholder="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="registrar()" class="btn btn-primary">
+                Registrar
+            </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cerrar
+            </button>
+            </div>
+        </div>
+    </div>
+</div>

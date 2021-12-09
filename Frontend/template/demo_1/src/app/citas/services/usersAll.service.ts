@@ -63,7 +63,7 @@ export class UserAllService {
 
   logOut(){
     localStorage.removeItem('token')
-    this.router.navigate(['/login']);
+    this.router.navigate(['/presentarhome']);
   }
 
 

@@ -189,6 +189,16 @@ var serviciospo = new Schema({
 
 var modelserviciospo = mongoose.model('serviciospo', serviciospo);
 
+var prueba = new Schema({
+
+    nespecialidad: { type: String },
+    ndoctor: { type: String },
+    descripcion: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelPrueba = mongoose.model('Prueba', prueba);
 
 module.exports = {
     modelPaciente: modelPaciente,
@@ -203,4 +213,5 @@ module.exports = {
     modelDetalleRecetaMedica: modelDetalleRecetaMedica,
     modelconsultarhorario: modelconsultarhorario,
     modelserviciospo: modelserviciospo,
+    modelPrueba: modelPrueba,
 }

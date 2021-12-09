@@ -37,6 +37,8 @@ const routes: Routes = [
   {path: 'login', component: LoginMComponent , pathMatch: 'full'},
   {path: 'welcome-page', component: WelcomePage, pathMatch: 'full'},
   {path: "gestionar-servicios", component:  GestionarServiciosComponent , canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'presentarhome', loadChildren: ()=> import('./Presentar Home/presentar-home.module').then(m => m.PresentarHomeModule)},
+  { path: 'laboratorio', loadChildren: ()=> import('./Laboratorio/laboratorio.module').then(m => m.LaboratorioModule)},
 
 ];
 
