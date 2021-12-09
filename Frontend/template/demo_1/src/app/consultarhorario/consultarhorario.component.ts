@@ -40,7 +40,7 @@ export class ConsultarhorarioComponent implements OnInit {
   formHorariosModificar: FormGroup;
 
   formFiltrar: FormGroup;
-filtro:"";
+  filtro:"";
   horarios: Consultarhorario[] = [];
 
   public horario: Consultarhorario = new Consultarhorario();
@@ -85,11 +85,15 @@ filtro:"";
 
     }
 
-  //  abrirModalFiltrar(row: Consultarhorario){
-   //   this.modalFiltrar.nativeElement.click();
-    //  this.hoarioSeleccionado = row;
-   //   this.formFiltrar.controls.fecha.setValue(this.datePipe.transform(row.fecha, 'yyyy-MM-dd'));
-   // } 
+    abrirModalFiltrar(row: Consultarhorario){
+      this.modalModificar.nativeElement.click();
+        this.hoarioSeleccionado = row;
+        this.formHorariosModificar.controls.especialidad.setValue(row.especialidad);
+        this.formHorariosModificar.controls.fecha.setValue(this.datePipe.transform(row.fecha, 'yyyy-MM-dd'));
+        this.formHorariosModificar.controls.horario.setValue(row.horario);
+        this.formHorariosModificar.controls.doctor.setValue(row.doctor);
+      } 
+
 
     abrirModal() {
       this.modalRegistrar.nativeElement.click();
@@ -199,8 +203,8 @@ filtro:"";
 
       let datos = this.formHorariosModificar.value
       var fecha1 = new Date( datos.fecha );
-      var dias = 1 ;
-      fecha1.setDate(fecha1.getDate() + dias);
+      var dias =0 ;
+      fecha1.setDate(fecha1.getDate());
 
       let query = {
         especialidad: datos.especialidad,
@@ -218,10 +222,10 @@ filtro:"";
  
       // TuFecha = (TuFecha.getDate() + '/' + (TuFecha.getMonth() + 1) + '/' + TuFecha.getFullYear() );
      
-     if(fecha1>=TuFecha){
-         Swal.fire('Advertencia', 'No puedes poner una fecha que ya paso o minimo hoy dia', 'warning')
-         return;
-     }
+   //  if(fecha1>=TuFecha){
+    //     Swal.fire('Advertencia', 'No puedes poner una fecha que ya paso o minimo hoy dia', 'warning')
+    //     return;
+   //  }
        
       let horario = query.horario;
       if(horario==""){

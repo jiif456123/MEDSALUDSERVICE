@@ -46,12 +46,14 @@
 
                     <!--Actualizar boton-->
                     <button (click)="abrirModalModificar(h)" class="btn btn-success btn-sm btn-block">
-                          <i class="mdi mdi-update mdi-18px">Actualizar</i>
-                      </button>
+                    <i class="mdi mdi-update mdi-18px">Actualizar</i>
+                </button>
+                    <input data-toggle="modal" data-target="#modalModificar" #modalModificar type="hidden" name="button" />
                     <!--Eliminar boton-->
                     <button (click)="eliminar(h._id)" class="btn btn-danger btn-sm btn-block">
-                        <i class="mdi mdi-update mdi-18px">Eliminar</i>
-                    </button>
+                  <i class="mdi mdi-update mdi-18px">Eliminar</i>
+              </button>
+                    <input data-toggle="modal" data-target="#modalInsertar" #modalModificar type="hidden" name="button" />
             </tr>
 
         </tbody>
@@ -60,9 +62,56 @@
 </div>
 
 
+
 <!--Modal para filtrar-->
-
-
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalFiltrar" aria-hidden="true" id="modalFiltrar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+            <div *ngIf="formHorariosModificar" class="modal-body">
+                <form [formGroup]="formHorariosModificar" class="row">
+                    <div class="form-group col-md-12">
+                        <label for="especialidad">especialidad</label>
+                        <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
+                             <option value="Medicina General">Medicina General</option>
+                             <option value="Dental">Dental</option>
+                             <option value="Obtetricia">Obtetricia</option>
+                             <option value="Pediatria">Pediatria</option>
+                             <option value="Dermatologia">Dermatologia</option>
+                             <option value="Gastroenterologia">Gastroenterologia</option>
+                             <option value="Oftalmologia">Oftalmologia</option>
+                           </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="fecha">Fecha</label>
+                        <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="horario">HORARIO</label>
+                        <input formControlName="horario" type="text" class="form-control" id="horario" placeholder="" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="doctor">Doctor</label>
+                        <input formControlName="doctor" type="text" class="form-control" id="doctor" placeholder="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="modificar()" class="btn btn-primary">
+                     Modificar
+                 </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                     Cerrar
+                 </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--Modal para añadir-->
