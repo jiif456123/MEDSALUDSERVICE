@@ -108,4 +108,65 @@
                     <i class="icon-screen-desktop menu-icon"></i>
                 </a>
             </li>
+
+
+
+        </ng-container>
+
+
+
+
+        <ng-container *ngIf="permitirDoctor==true">
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarRecetaMedica.isActive }">
+                <a class="nav-link" routerLink="/gestionar-receta-medica" routerLinkActive #gestionarRecetaMedica="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Receta Medica</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{ 'active': consultarRecetaMedica.isActive }">
+                <a class="nav-link" routerLink="/consultar-receta-medica" routerLinkActive #consultarRecetaMedica="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Consultar Receta Medica</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+
+
+        </ng-container>
+
+
+        <ng-container *ngIf="permitirEnfermera==true">
+
+
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarCaja.isActive }">
+                <a class="nav-link" routerLink="/gestionar-caja" routerLinkActive #gestionarCaja="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Caja</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{ 'active': gestionarEspecialidad.isActive }">
+                <a class="nav-link" routerLink="/gestionar-especialidad" routerLinkActive #gestionarEspecialidad="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Gestionar Especialidad</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+
+            <li class="nav-item" [ngClass]="{ 'active': consultarServicio.isActive }">
+                <a class="nav-link" routerLink="/consultarservicio" routerLinkActive #consultarServicio="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Consultar Servicio</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+
         </ng-container>

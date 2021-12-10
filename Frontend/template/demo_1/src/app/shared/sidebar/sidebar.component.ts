@@ -36,6 +36,8 @@ export class SidebarComponent implements OnInit {
   public permitirCita;
   public permitirReporteGeneral;
   public permitirGestionarServiAndCambiarC;
+  public permitirEnfermera;
+  public permitirDoctor;
   ngOnInit() {
     console.log(this.userAllService.selectedTokenUser.nombre);
       
@@ -71,21 +73,29 @@ export class SidebarComponent implements OnInit {
         ){
             this.permitirHistoria=true;
             this.permitirReporteGeneral=true;
+            this.permitirDoctor=true;
         }else{
           this.permitirHistoria=false;
           this.permitirReporteGeneral=false;
+          this.permitirDoctor=false;
         }
 
         if(this.rolSideBar=="enfermera"||this.rolSideBar=="Enfermera"||this.rolSideBar=="Enfermero"||this.rolSideBar=="enfermero"){
             this.permitirGPacienteYGCita=true;
             this.permitirGestionarServiAndCambiarC=true;
+            this.permitirEnfermera=true;
+            this.permitirDoctor=false;
+
         }else{
           this.permitirGPacienteYGCita=false;
           this.permitirGestionarServiAndCambiarC=false;
+          this.permitirEnfermera=false;
         }
         
         if(this.rolSideBar=="paciente"||this.rolSideBar=="Paciente"||this.rolSideBar=="Medico"||this.rolSideBar=="medico"||this.rolSideBar=="Doctor"||this.rolSideBar=="doctor"){
           this.permitirCita=true;
+          
+
         }else{
           this.permitirCita=false;
         }
