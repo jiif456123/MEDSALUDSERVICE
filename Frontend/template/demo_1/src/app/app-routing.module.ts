@@ -22,6 +22,8 @@ import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gesti
 import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
 import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
+import { TicketCajaComponent } from './gestionar-caja/ticket-caja/ticket-caja.component';
 
 import { AuthGuard } from './auth.guard';
 
@@ -69,6 +71,9 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad Actualizar' }
+  },
+  {
+    path: 'gestionar-caja', component: GestionarCajaComponent, data: { title: 'Gestionar Caja' }
   },
 
   {path: 'login', component: LoginMComponent , pathMatch: 'full'},

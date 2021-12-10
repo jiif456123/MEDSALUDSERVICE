@@ -14,6 +14,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { NgxPrintModule } from 'ngx-print';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -58,6 +59,8 @@ import { gestionarRecetaMedicaComponent } from './Cgestionar-receta-medica/gesti
 import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
 import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
+import { TicketCajaComponent } from './gestionar-caja/ticket-caja/ticket-caja.component';
 
 const config: SocketIoConfig = {url: 'http://localhost:3000', options: {withCredentials: '*'}};
 
@@ -97,6 +100,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EspecialidadComponent,
     EspecialidadRegistradoComponent,
     EspecialidadActualizadoComponent,
+    GestionarCajaComponent,
+    TicketCajaComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPrintModule,
     //ChartsModule,
     SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
