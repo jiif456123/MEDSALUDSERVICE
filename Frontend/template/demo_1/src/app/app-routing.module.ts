@@ -46,35 +46,25 @@ const routes: Routes = [
   {path: "cambiarc", component:  CambiarContraComponent , canActivate: [AuthGuard], pathMatch: 'full' },
 
   {
-    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Consultar Receta Medica' }
-  },
+    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent,  canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
-  },
+    path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
-  },
+    path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: "consultarservicio", component: consultarserviciocomponent, data: { title: 'Consultar Servicio' }
-  },
+    path: "consultarservicio", component: consultarserviciocomponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: "gestionar-citas", component: GestionarCitasComponent, data: { title: 'Gestionar Citas' }
-  },
+    path: "gestionar-citas", component: GestionarCitasComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: "consultar-receta-medica", component: gestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
-  },
+    path: "consultar-receta-medica", component: gestionarRecetaMedicaComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: 'gestionar-especialidad', component: EspecialidadComponent, data: { title: 'Gestionar Especialidad' }
-  },
+    path: 'gestionar-especialidad', component: EspecialidadComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, data: { title: 'Gestionar Especialidad Registrado' }
-  },
+    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad Actualizar' }
-  },
+    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   {
-    path: 'gestionar-caja', component: GestionarCajaComponent, data: { title: 'Gestionar Caja' }
-  },
+    path: 'gestionar-caja', component: GestionarCajaComponent, canActivate: [AuthGuard], pathMatch: 'full' },
 
   {path: 'login', component: LoginMComponent , pathMatch: 'full'},
   {path: 'welcome-page', component: WelcomePage, pathMatch: 'full'},
