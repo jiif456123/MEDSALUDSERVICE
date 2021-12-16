@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Serviciospo } from '../citas/models/serviciospo.model';
+import { ServiciosService } from '../citas/services/servicios.service';
 import { Paciente } from '../models/paciente.model';
 import { PacienteService } from '../../app/services/gestionar-paciente service/paciente.service';
 @Component({
@@ -19,16 +21,20 @@ export class PresentarHomeComponent implements OnInit {
   formPacienteModificar: FormGroup;
 
   filtro = "";
-
+  servicios: Serviciospo[] = []
+  servicioSeleccionado: Serviciospo;
   pacientes: Paciente[] = []
   pacienteSeleccionado: Paciente;
   constructor(
     private pacienteService: PacienteService,
+    private servicioService: ServiciosService,
     private fb: FormBuilder,
     private datePipe: DatePipe
   ) { }
 
   async ngOnInit(): Promise<void> {
+    var data = await this.servicioService.listar().toPromise();
+    this.servicios = data.data
     var data = await this.pacienteService.listar().toPromise();
     this.pacientes = data.data
     this.formPaciente = this.fb.group({

@@ -126,13 +126,6 @@
                 </a>
             </li>
 
-            <li class="nav-item" [ngClass]="{ 'active': consultarRecetaMedica.isActive }">
-                <a class="nav-link" routerLink="/consultar-receta-medica" routerLinkActive #consultarRecetaMedica="routerLinkActive" [routerLinkActiveOptions]="{exact:
-            true}">
-                    <span class="menu-title" translate>Consultar Receta Medica</span>
-                    <i class="icon-screen-desktop menu-icon"></i>
-                </a>
-            </li>
 
 
 
@@ -168,5 +161,20 @@
                 </a>
             </li>
 
+            <li class="nav-item" [ngClass]="{ 'active': consultarRecetaMedica.isActive }">
+                <a class="nav-link" routerLink="/consultar-receta-medica" routerLinkActive #consultarRecetaMedica="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Consultar Receta Medica</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{ 'active': consultarAgenda.isActive }">
+                <a class="nav-link" routerLink="/consultaragenda" routerLinkActive #consultarAgenda="routerLinkActive" [routerLinkActiveOptions]="{exact:
+            true}">
+                    <span class="menu-title" translate>Consultar Agenda</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+            </li>
 
         </ng-container>
